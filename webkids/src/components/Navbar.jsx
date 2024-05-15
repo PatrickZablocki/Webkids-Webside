@@ -25,15 +25,19 @@ const Navbar = () => {
             <div className={`${styles.nav_icons} ${showMenu ? styles.show : ''}`}>
                 <span className={styles.icon}>
                     <FontAwesomeIcon icon={faHome} />
+                    <h3>Start</h3>
                 </span>
                 <span className={styles.icon}>
                     <FontAwesomeIcon icon={faUserFriends} />
+                    <h3>Ihr Netzwerk</h3>
                 </span>
                 <span className={styles.icon}>
                     <FontAwesomeIcon icon={faEnvelope} />
+                    <h3>Nachrichten</h3>
                 </span>
                 <span className={styles.icon}>
                     <FontAwesomeIcon icon={faBell} />
+                    <h3>Mitteilungen</h3>
                 </span>
                 {isLoggedIn ? (
                     <span className={styles.profile_picture}>

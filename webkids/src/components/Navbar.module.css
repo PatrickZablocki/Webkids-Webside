@@ -8,23 +8,19 @@
     width: 100%;
     position: fixed;
 }
-
 .logo {
     width: 120px;
 }
-
 .search_bar {
     display: flex;
     align-items: center;
 }
-
 .search_bar input[type="text"] {
     padding: 5px;
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
 .search_bar button {
     padding: 5px 10px;
     background-color: #666;
@@ -33,18 +29,19 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
 .nav_icons {
     display: flex;
-    align-items: center;
+    text-align: center;
 }
-
+.nav_icons h3{
+    display: flex;
+    font-size: 0.875rem;
+}
 .icon {
     margin-right: 10px;
     font-size: 1.2rem;
     margin-inline-start: 40px;
 }
-
 .menu_icon {
     display: none;
     cursor: pointer;
