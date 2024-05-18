@@ -56,6 +56,17 @@
     display: none;
     cursor: pointer;
 }
+.login_register{
+    display: flex;
+    
+}
+.login_register li{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline-start: 12px;
+}
 /* Hier beginnen die Media Queries für die mobile Ansicht */
 @media only screen and (max-width: 768px) {
     .menu_icon {

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUserFriends, faEnvelope, faBell, faBars } from '@fortawesome/free-solid-svg-icons';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
-    const [showMenu, setShowMenu] = useState(false); // Zustand für das Menü
-
-    const isLoggedIn = true; // Benutzer ist eingeloggt
+    const [showMenu, setShowMenu] = useState(false);
+    const isLoggedIn = false;
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -21,36 +21,37 @@ const Navbar = () => {
                 <button>Suchen</button>
             </div>
 
-            
             <div className={`${styles.nav_icons} ${showMenu ? styles.show : ''}`}>
                 <span className={styles.icon}>
                     <FontAwesomeIcon icon={faHome} />
-                    <a href="">Start</a>
+                    <Link to="/">Start</Link>
                 </span>
                 <span className={styles.icon}>
                     <FontAwesomeIcon icon={faUserFriends} />
-                    <a href="">Ihr Netzwerk</a>
+                    <Link to="/about">Ihr Netzwerk</Link>
                 </span>
                 <span className={styles.icon}>
                     <FontAwesomeIcon icon={faEnvelope} />
-                    <a href="">Nachrichten</a>
+                    <Link to="/contact">Nachrichten</Link>
                 </span>
                 <span className={styles.icon}>
                     <FontAwesomeIcon icon={faBell} />
-                    <a href="">Mitteilungen</a>
+                    <Link to="/notifications">Mitteilungen</Link>
                 </span>
                 {isLoggedIn ? (
                     <span className={styles.profile_picture}>
+                        
                     </span>
                 ) : (
                     <span className={styles.login_register}>
+                        <li><Link to="/login">Login</Link></li>
+                        <li><Link to="/register">Register</Link></li>
                     </span>
                 )}
             </div>
 
-            
             <div className={styles.menu_icon} onClick={toggleMenu}>
-            <FontAwesomeIcon icon={faBars} />
+                <FontAwesomeIcon icon={faBars} />
             </div>
         </div>
     );
