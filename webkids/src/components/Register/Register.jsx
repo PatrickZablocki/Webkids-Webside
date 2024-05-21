@@ -1,26 +1,21 @@
 import React from 'react';
 
 function Register() {
-return (
+  const handleRegister = (event) => {
+    event.preventDefault();
+    
+  };
+
+  return (
     <div>
-        <h1>Register Page</h1>
-    <form>
-        <div>
-            <label>Username:</label>
-            <input type="text" name="username" />
-        </div>
-        <div>
-            <label>Email:</label>
-            <input type="email" name="email" />
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password" />
-        </div>
+      <h1>Register</h1>
+      <form onSubmit={handleRegister}>
+        <input type="text" placeholder="Username" required />
+        <input type="password" placeholder="Password" required />
         <button type="submit">Register</button>
-    </form>
+      </form>
     </div>
-    );
+  );
 }
 
 export default Register;
