@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 
 function Register() {
   const handleRegister = (event) => {
     event.preventDefault();
-    
   };
 
   return (
