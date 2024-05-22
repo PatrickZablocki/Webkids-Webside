@@ -67,11 +67,22 @@
     align-items: center;
     margin-inline-start: 12px;
 }
+.nav_icons.show {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background-color: #222;
+    width: auto;
+    padding: 10px;
+    z-index: 1000;
+}
 /* Hier beginnen die Media Queries für die mobile Ansicht */
 @media only screen and (max-width: 768px) {
     .menu_icon {
         display: block;
-        margin-right: 50px;
+        margin-right: 20px;
     }
 
     .nav_icons {
@@ -85,5 +96,16 @@
 
     .menu_icon.show .menu_line {
         background-color: white;
+    }
+    .nav_icons.show {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        right: 10px;
+        background-color: #92919145;
+        width: auto;
+        padding: 10px;
+        z-index: 1000;
     }
 }

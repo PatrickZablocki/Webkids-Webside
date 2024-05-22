@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUserFriends, faEnvelope, faBell, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUserFriends, faEnvelope, faBell, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -20,7 +20,6 @@ const Navbar = () => {
                 <input type="text" placeholder="Suche..." />
                 <button>Suchen</button>
             </div>
-
             <div className={`${styles.nav_icons} ${showMenu ? styles.show : ''}`}>
                 <span className={styles.icon}>
                     <FontAwesomeIcon icon={faHome} />
@@ -49,9 +48,9 @@ const Navbar = () => {
                     </span>
                 )}
             </div>
-
+            {/*  Das hier ist die Einstellung für das Hamburger Menu und wenn wir es öffnen, das X zum Schließen */}
             <div className={styles.menu_icon} onClick={toggleMenu}>
-                <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon icon={showMenu ? faTimes : faBars} />
             </div>
         </div>
     );
