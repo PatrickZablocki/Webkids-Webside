@@ -18,6 +18,9 @@ export default function Dashboard() {
                         aria-label="Recipient's username"
                         aria-describedby="basic-addon2"
                     />
+
+
+                    
                     <Button variant="outline-secondary" id="button-addon2">
                         Post
                     </Button>
