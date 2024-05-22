@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@fortawesome/free-brands-svg-icons": "^6.5.2"
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "express": "^4.19.2"
   }
 }
