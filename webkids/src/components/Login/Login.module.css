@@ -1,68 +1,99 @@
-body{
-    background-color: #222222bd;
-}
 .Login_container {
-    border: 1px solid black;
-    max-width: 800px;
-    height: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-image: url("../../../public/LogIn_Background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
+
+.Login_box {
+    display: flex;
+    width: 1000px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
 .Login_content {
-    text-align: center;
-}
-.Login_content h1 {
-    font-size: 3rem;
-    text-shadow: 15px 15px 15px #222;
-    color: #fff;
-    margin-bottom: 20px;
-}
-.Login_content input {
-    width: 100%;
-    height: 40px;
-    margin: 12px 0;
-    padding: 0 10px;
+    padding: 40px;
+    width: 50%;
     box-sizing: border-box;
 }
-.Login_content input:hover{
-    background: rgb(45, 44, 44);
-    color: white;
+/* Hier lege ich den Hintergrund fest für die hälfte der box */
+.Login_image {
+    width: 50%;
+    background: url(../../../public/Login_Background5.png) no-repeat center center;
+    background-size: cover;
 }
-.Login_content button {
-    width: 100%;
-    height: 40px;
-    border-radius: 20px;
-    border: 2px solid #222;
-    box-shadow: 5px 5px 5px #222;
-    background: rgb(11, 151, 217);
-    transition: background 0.3s;
+
+form {
+    display: flex;
+    flex-direction: column;
 }
-.Login_content button:hover {
-    background: #09c498;
+
+input {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-/*  Hier passe ich die Google & Apple Buttons an */
-.Login_Social{
-    margin-top: 50px;
+.google_button, .apple_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
 }
+
 .google_button {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
+    background: #db4437;
+    color: white;
 }
+.google_button:hover{
+    background: #fd1500be;
+}
+
 .apple_button {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
+    background: #000;
+    color: white;
 }
-.icon {
+.apple_button:hover{
+    background: #000000d1;
+}
+.icon{
     margin-right: 10px;
     font-size: 24px;
+}
+
+hr {
+    margin: 20px 0;
+}
+.Login_toRegister {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.Login_toRegister a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.Login_toRegister a:hover {
+    text-decoration: underline;
 }

@@ -1,0 +1,94 @@
+.Register_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.Register_box {
+    display: flex;
+    width: 1000px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+/* Hier lege ich den Hintergrund fest für die hälfte der box */
+.Register_image {
+    width: 50%;
+    background: url('../../../public//LogIn_Background.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.Register_content {
+    padding: 40px;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.google_button, .apple_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+/* Hir Starten die CSS Sytles für die Icons und die Social Networks */
+.icon{
+    margin-right: 10px;
+    font-size: 24px;
+}
+.google_button {
+    background: #db4437;
+    color: white;
+}
+
+.apple_button {
+    background: #000;
+    color: white;
+}
+.google_button:hover{
+    background: #fd1500be;
+}
+.apple_button:hover{
+    background: #000000d1;
+}
+
+.Register_Social {
+    margin-top: 20px;
+}
+
+.Register_toRegister {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.Register_toRegister a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.Register_toRegister a:hover {
+    text-decoration: underline;
+}
