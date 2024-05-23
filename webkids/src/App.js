@@ -8,7 +8,7 @@ import Register from "./components/Register/Register";
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App" id="root">
         <Navbar />
         <div className="content">
           <Routes>

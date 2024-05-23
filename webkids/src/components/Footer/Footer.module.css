@@ -1,3 +1,36 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
 .footer_container {
   background-color: #333;
   color: #fff;
@@ -5,6 +38,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .footer_content {
@@ -22,10 +56,13 @@
 .footer_content ul {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .footer_content li {
-  margin: 5px 0;
+  margin: 5px 15px;
 }
 
 .footer_content a {
@@ -40,4 +77,33 @@
 .footer_bottom {
   margin-top: 20px;
   text-align: center;
+  width: 100%;
+}
+
+.cookie_banner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.cookie_banner p {
+  margin: 0 0 10px 0;
+}
+
+.cookie_banner button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.cookie_banner button:hover {
+  background-color: #45a049;
 }
