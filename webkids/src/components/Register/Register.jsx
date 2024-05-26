@@ -1,6 +1,8 @@
 import React from 'react';
 
 function Register() {
+
+  console.log('hi')
   const handleRegister = (event) => {
     event.preventDefault();
     
