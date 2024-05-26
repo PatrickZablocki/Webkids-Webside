@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(11, 25, 128, 1) 50%, rgba(252, 176, 69, 1) 100%);
 }
 
 .Register_box {
@@ -91,4 +91,16 @@ button {
 
 .Register_toRegister a:hover {
     text-decoration: underline;
+}
+/* Einstellung zum Logo*/
+.logo {
+    width: 150px;
+    border: 1px solid grey;
+    border-radius:50%;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.logoLink {
+    text-decoration: none;
 }

@@ -4,6 +4,7 @@
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(34,193,195,1) 30%, rgba(38,123,247,0.7063200280112045) 77%);
 }
 
 .Login_box {
@@ -96,4 +97,17 @@ hr {
 
 .Login_toRegister a:hover {
     text-decoration: underline;
+}
+
+/* Einstellung zum Logo*/
+.logo {
+    width: 150px;
+    border: 1px solid grey;
+    border-radius:50%;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.logoLink {
+    text-decoration: none;
 }

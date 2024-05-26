@@ -14,7 +14,7 @@ const Navbar = () => {
 
     return (
         <div className={styles.Navbar_container}>
-            <img src="/Logo/Logo_Webkids.png" alt="Logo" className={styles.logo} />
+            <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
 
             <div className={styles.search_bar}>
                 <input type="text" placeholder="Suche..." />

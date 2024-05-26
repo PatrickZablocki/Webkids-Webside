@@ -22,11 +22,14 @@ function Login() {
 
     return (
         <div className={styles.Login_container}>
+            <Link to="/navbar" className={styles.logoLink}>
+            <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
+            </Link>
             <div className={styles.Login_box}>
                 <div className={styles.Login_content}>
                     <h1>Login</h1>
                     <form onSubmit={handleLogin}>
-                        <input type="text" placeholder="Username" required />
+                        <input type="email" placeholder="E-Mail" required />
                         <input type="password" placeholder="Password" required />
                         <button type="submit">Anmelden</button>
                     </form>

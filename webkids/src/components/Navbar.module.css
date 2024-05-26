@@ -5,14 +5,18 @@
     padding: 10px;
     background-color: #333;
     color: white;
-    width: 100%;
+    width: 98%;
     position: fixed;
+    border-radius: 40px;
 }
 .logo {
-    width: 120px;
+    width: 150px;
+    border: 1px solid grey;
+    border-radius:50%;
 }
 .search_bar {
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 .search_bar input[type="text"] {
@@ -28,6 +32,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 19px;
 }
 .nav_icons {
     display: flex;
@@ -107,5 +112,6 @@
         width: auto;
         padding: 10px;
         z-index: 1000;
+        border-radius: 30px;
     }
 }

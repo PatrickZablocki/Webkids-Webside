@@ -24,12 +24,15 @@ function Register() {
 
     return (
         <div className={styles.Register_container}>
+            <Link to="/navbar" className={styles.logoLink}>
+            <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
+            </Link>
             <div className={styles.Register_box}>
                 <div className={styles.Register_image}></div>
                 <div className={styles.Register_content}>
                     <h1>Registrieren</h1>
                     <form onSubmit={handleRegister}>
-                        <input type="text" placeholder="Username" required />
+                        <input type="email" placeholder="E-Mail" required />
                         <input type="text" placeholder="Vorname" required />
                         <input type="text" placeholder="Nachname" required />
                         <label>Geburtsdatum:</label>
