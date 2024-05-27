@@ -1,27 +1,8 @@
-import React, { useEffect, useState } from 'react';
 
-function PostList() {
-  const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/posts');
+import React from 'react';
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const posts = await response.json();
-        setPosts(posts);
-      } catch (error) {
-        console.error('There was an error fetching the posts!', error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
+function PostList({ posts }) {
   return (
     <div>
       {posts.map((post) => (

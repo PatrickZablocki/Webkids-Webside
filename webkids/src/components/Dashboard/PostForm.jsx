@@ -25,7 +25,7 @@ function PostForm({ onNewPost }) {
       }
 
       const newPost = await response.json();
-      onNewPost(newPost);
+      onNewPost(newPost); 
       setText('');
       setFile(null);
       setError(null);
