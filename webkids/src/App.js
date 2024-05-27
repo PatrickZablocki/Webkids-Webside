@@ -8,7 +8,9 @@ function App() {
   return (
     <Router>
       {/* <div className="App"> */}
+
         <Routes>
+          <Route path="/" element={<Navbar />} />
           <Route path="/navbar" element={<Navbar />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

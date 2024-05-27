@@ -6,12 +6,39 @@ import styles from './Register.module.css';
 
 function Register() {
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [birthdate, setBirthdate] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleRegister = (event) => {
+    const handleRegister = async (event) => {
         event.preventDefault();
-        console.log('Registration successful');
-        navigate('/login');
+        try {
+            const response = await fetch('http://localhost:5000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    firstName,
+                    lastName,
+                    birthdate,
+                    password,
+                }),
+            });
+
+            if (response.ok) {
+                console.log('Registration successful');
+                navigate('/login');
+            } else {
+                const data = await response.json();
+                console.error('Registration failed:', data.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     const handleLoginWithGoogle = () => {
@@ -32,9 +59,27 @@ function Register() {
                 <div className={styles.Register_content}>
                     <h1>Registrieren</h1>
                     <form onSubmit={handleRegister}>
-                        <input type="email" placeholder="E-Mail" required />
-                        <input type="text" placeholder="Vorname" required />
-                        <input type="text" placeholder="Nachname" required />
+                    <input
+                        type="email"
+                        placeholder="E-Mail"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Vorname"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Nachname"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                    />
                         <label>Geburtsdatum:</label>
                         <input 
                             type="date" 
@@ -42,7 +87,12 @@ function Register() {
                             onChange={(e) => setBirthdate(e.target.value)} 
                             required 
                         />
-                        <input type="password" placeholder="Password" required />
+                        <input type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
                         <button type="submit">Registrieren</button>
                     </form>
                     <hr />
