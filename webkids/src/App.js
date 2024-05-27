@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer/Footer";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 
@@ -18,7 +17,6 @@ function App() {
             {/* Weitere Routen hier hinzufügen */}
           </Routes>
         </div>
-        <Footer />
       </div>
     </Router>
   );

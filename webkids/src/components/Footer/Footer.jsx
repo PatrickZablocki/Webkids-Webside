@@ -28,18 +28,6 @@ const Footer = () => {
         <nav className={styles.links_section} aria-label="Footer navigation">
           <ul>
             <li>
-              <Link to="/about">Über uns</Link>
-            </li>
-            <li>
-              <Link to="/contact">Kontakt</Link>
-            </li>
-            <li>
-              <Link to="/privacy">Datenschutz</Link>
-            </li>
-            <li>
-              <Link to="/terms">Nutzungsbedingungen</Link>
-            </li>
-            <li>
               <Link to="/cookies">Cookies</Link>
             </li>
             <li>
