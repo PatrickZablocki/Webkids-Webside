@@ -9,6 +9,7 @@ import CookieSettings from "./components/Pages/CookieSettings";
 import Impressum from "./components/Pages/Impressum";
 import Help from "./components/Pages/Help";
 import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
+import CookieConsent from "./components/CookieConsent/CookieConsent";
 import styles from "./App.module.css";
 
 function App() {
@@ -26,10 +27,10 @@ function App() {
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/help" element={<Help />} />
             <Route path="/datenschutzerklaerung" element={<PrivacyPolicy />} />
-            {/* Weitere Routen hier hinzufügen */}
           </Routes>
         </div>
         <Footer />
+        <CookieConsent />
       </div>
     </Router>
   );

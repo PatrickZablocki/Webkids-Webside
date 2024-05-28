@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react";
 import styles from "./CookieConsent.module.css";
 
 const CookieConsent = () => {
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(true);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookieConsent");
-    if (!consent) {
-      setShowPopup(true);
-    }
+    setShowPopup(true);
   }, []);
 
   const setCookies = () => {
@@ -22,13 +19,11 @@ const CookieConsent = () => {
   };
 
   const handleAccept = () => {
-    localStorage.setItem("cookieConsent", "accepted");
     setShowPopup(false);
     setCookies();
   };
 
   const handleDecline = () => {
-    localStorage.setItem("cookieConsent", "declined");
     setShowPopup(false);
     clearCookies();
   };
@@ -43,11 +38,11 @@ const CookieConsent = () => {
         <div className={styles.content}>
           <h2>Cookie-Hinweis</h2>
           <p>
-            Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern.
-            Einige Cookies sind notwendig für das Funktionieren der Website,
-            andere helfen uns, das Nutzerverhalten zu analysieren oder Inhalte
-            zu personalisieren. Sie können selbst entscheiden, welche Cookies
-            Sie zulassen möchten.
+            Diese Website verwendet Cookies, um sicherzustellen, dass Sie die
+            beste Erfahrung auf unserer Website erhalten. Durch die weitere
+            Nutzung unserer Website stimmen Sie der Verwendung von Cookies zu.
+            Weitere Informationen finden Sie in unserer{" "}
+            <a href="/datenschutzerklaerung">Datenschutzerklärung</a>.
           </p>
           <div className={styles.actions}>
             <button onClick={handleAccept} className={styles.accept}>
@@ -57,10 +52,6 @@ const CookieConsent = () => {
               Ablehnen
             </button>
           </div>
-          <p>
-            Weitere Informationen finden Sie in unserer{" "}
-            <a href="/datenschutzerklaerung">Datenschutzerklärung</a>.
-          </p>
         </div>
       </div>
     </div>
