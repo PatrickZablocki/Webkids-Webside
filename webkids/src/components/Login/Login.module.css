@@ -111,3 +111,8 @@ hr {
 .logoLink {
     text-decoration: none;
 }
+@media only screen and (max-width: 768px){
+    .logo{
+        width: 10%;
+    }
+}
