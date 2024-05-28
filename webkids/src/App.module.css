@@ -7,6 +7,10 @@
 
 .content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .App-logo {

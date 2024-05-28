@@ -6,21 +6,27 @@
   background-color: #333;
   color: white;
   width: 100%;
-  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
+
 .logo {
-  width: 120px;
+  width: 100px;
 }
+
 .search_bar {
   display: flex;
   align-items: center;
 }
+
 .search_bar input[type="text"] {
   padding: 5px;
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
 .search_bar button {
   padding: 5px 10px;
   background-color: #666;
@@ -29,36 +35,44 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
 .nav_icons {
   display: flex;
   text-align: center;
   margin-right: 60px;
 }
+
 .nav_icons:hover {
   cursor: pointer;
 }
+
 .nav_icons a {
   display: block;
   font-size: 0.875rem;
   color: #fff;
   text-decoration: none;
 }
+
 .nav_icons a:hover {
   text-decoration: underline;
   color: #d43333;
 }
+
 .icon {
   margin-right: 10px;
   font-size: 1.2rem;
   margin-inline-start: 40px;
 }
+
 .menu_icon {
   display: none;
   cursor: pointer;
 }
+
 .login_register {
   display: flex;
 }
+
 .login_register li {
   list-style: none;
   display: flex;
@@ -66,7 +80,8 @@
   align-items: center;
   margin-inline-start: 12px;
 }
-/* Hier beginnen die Media Queries für die mobile Ansicht */
+
+/* Media Queries für die mobile Ansicht */
 @media only screen and (max-width: 768px) {
   .menu_icon {
     display: block;

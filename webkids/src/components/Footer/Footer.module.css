@@ -1,76 +1,68 @@
-.footer_container {
+.footer {
   background-color: #333;
-  color: #fff;
-  padding: 20px 0;
+  color: white;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-}
-
-.footer_content {
-  display: flex;
-  justify-content: space-around;
-  width: 80%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer_content img {
-  width: 100px;
-}
-
-.footer_content ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
-.footer_content li {
-  margin: 5px 15px;
+.footerContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Ermöglicht das Umfließen von Inhalten auf kleinen Bildschirmen */
 }
 
-.footer_content a {
-  color: #fff;
+.footerLogo {
+  height: 60px;
+  margin-right: 30px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 0;
+}
+
+.footer ul li {
+  display: inline;
+}
+
+.footer ul li a {
   text-decoration: none;
-}
-
-.footer_content a:hover {
-  text-decoration: underline;
-}
-
-.footer_bottom {
-  margin-top: 20px;
-  text-align: center;
-  width: 100%;
-}
-
-.cookie_banner {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
   color: white;
-  text-align: center;
-  padding: 10px;
-  z-index: 1000;
-}
-
-.cookie_banner p {
-  margin: 0 0 10px 0;
-}
-
-.cookie_banner button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
   font-size: 16px;
+  transition: color 0.3s ease;
 }
 
-.cookie_banner button:hover {
-  background-color: #45a049;
+.footer ul li a:hover {
+  color: #d43333;
+}
+
+.footer div {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footerLogo {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+
+  .footer ul {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
