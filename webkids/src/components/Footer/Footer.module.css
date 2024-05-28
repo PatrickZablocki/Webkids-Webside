@@ -1,7 +1,7 @@
 .footer {
-  background-color: #333;
-  color: white;
-  padding: 20px;
+  background-color: #333; /* Gleiche Hintergrundfarbe wie die Navbar */
+  color: white; /* Gleiche Schriftfarbe wie die Navbar */
+  padding: 20px; /* Padding so anpassen, dass es zur Navbar passt */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,12 +12,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap; /* Ermöglicht das Umfließen von Inhalten auf kleinen Bildschirmen */
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .footerLogo {
-  height: 60px;
-  margin-right: 30px;
+  height: 50px; /* Größe des Logos an die der Navbar anpassen */
+  margin-right: 20px; /* Gleiche Abstände wie in der Navbar */
 }
 
 .footer ul {
@@ -25,8 +27,9 @@
   padding: 0;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 15px; /* Abstand an die Navbar anpassen */
   margin: 0;
+  flex-wrap: wrap;
 }
 
 .footer ul li {
@@ -35,19 +38,21 @@
 
 .footer ul li a {
   text-decoration: none;
-  color: white;
-  font-size: 16px;
+  color: white; /* Gleiche Schriftfarbe wie die Navbar */
+  font-size: 16px; /* Schriftgröße an die Navbar anpassen */
   transition: color 0.3s ease;
 }
 
 .footer ul li a:hover {
-  color: #d43333;
+  color: #d43333; /* Hover-Farbe an die der Navbar anpassen */
 }
 
 .footer div {
-  margin-top: 10px;
-  font-size: 16px;
+  margin-top: 10px; /* Abstand so anpassen, dass es zur Navbar passt */
+  font-size: 16px; /* Schriftgröße an die Navbar anpassen */
   text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
@@ -57,12 +62,12 @@
   }
 
   .footerLogo {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     margin-right: 0;
   }
 
   .footer ul {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 }
