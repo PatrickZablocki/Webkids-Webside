@@ -7,14 +7,15 @@ const path = require('path');
 
 const app = express();
 
-
 app.use(express.json());
 app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
 const mongoURI = process.env.MONGO_URI;
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
@@ -39,19 +40,31 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
 app.post('/api/posts', upload.single('file'), (req, res) => {
-    const newPost = new Post({
-      text: req.body.text,
-      filePath: req.file ? req.file.path : null
-    });
-  
-    newPost.save()
-      .then(post => res.json(post))
-      .catch(err => {
-        console.error('Error creating post:', err);
-        res.status(500).json({ error: err.message });
-      });
+  const newPost = new Post({
+    text: req.body.text,
+    filePath: req.file ? req.file.path : null
   });
+
+  newPost.save()
+    .then(post => res.json(post))
+    .catch(err => {
+      console.error('Error creating post:', err);
+      res.status(500).json({ error: err.message });
+    });
+});
+
+app.delete('/api/posts/:id', (req, res) => {
+  const postId = req.params.id;
+
+  Post.findByIdAndDelete(postId)
+    .then(() => res.json({ message: 'Post deleted' }))
+    .catch(err => {
+      console.error('Error deleting post:', err);
+      res.status(500).json({ error: err.message });
+    });
+});
 
 
 app.get('/api/posts', (req, res) => {

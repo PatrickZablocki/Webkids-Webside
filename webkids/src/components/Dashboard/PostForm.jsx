@@ -12,20 +12,20 @@ function PostForm({ onNewPost }) {
     if (file) {
       formData.append('file', file);
     }
-
+  
     try {
       const response = await fetch('http://localhost:5000/api/posts', {
         method: 'POST',
         body: formData,
       });
-
+  
       if (!response.ok) {
         const errorResponse = await response.json();
         throw new Error(errorResponse.error || 'Network response was not ok');
       }
-
+  
       const newPost = await response.json();
-      onNewPost(newPost); 
+      onNewPost(newPost);
       setText('');
       setFile(null);
       setError(null);
