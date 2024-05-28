@@ -108,6 +108,19 @@ hr {
     top: 20px;
     left: 20px;
 }
+/* Das ist das Styling für das Icon des Passwortes mit dem Auge */
+.passwordContainer {
+    position: relative;
+    width: 100%;
+}
+
+.eyeIcon {
+    position: absolute;
+    right: 10px;
+    top: 35%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
 .logoLink {
     text-decoration: none;
 }

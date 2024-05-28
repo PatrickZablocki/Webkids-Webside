@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faApple } from '@fortawesome/free-brands-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './Login.module.css';
 
@@ -8,6 +9,7 @@ function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [error, setError] = useState('');
 
     const handleLogin = async (event) => {
@@ -44,6 +46,9 @@ function Login() {
     const handleLoginWithApple = () => {
         console.log('Anmeldung mit Apple');
     };
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
     return (
         <div className={styles.Login_container}>
             <Link to="/navbar" className={styles.logoLink}>
@@ -60,13 +65,20 @@ function Login() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                        <div className={styles.passwordContainer}>
+                            <input
+                                type={passwordVisible ? "text" : "password"}
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <FontAwesomeIcon
+                                icon={passwordVisible ? faEye : faEyeSlash}
+                                onClick={togglePasswordVisibility}
+                                className={styles.eyeIcon}
+                            />
+                        </div>
                         <button type="submit">Anmelden</button>
                     </form>
                     {error && <p className={styles.error}>{error}</p>}

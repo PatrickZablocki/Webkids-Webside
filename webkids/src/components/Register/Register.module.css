@@ -28,7 +28,16 @@
     width: 50%;
     box-sizing: border-box;
 }
-
+input[type="email"],
+input[type="text"],
+input[type="date"],
+input[type="password"] {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
 form {
     display: flex;
     flex-direction: column;
@@ -105,6 +114,19 @@ button {
 }
 .logoLink {
     text-decoration: none;
+}
+/* Das ist das Styling für das Icon des Passwortes mit dem Auge */
+.passwordContainer {
+    position: relative;
+    width: 100%;
+}
+
+.eyeIcon {
+    position: absolute;
+    right: 10px;
+    top: 35%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 @media only screen and (max-width: 768px){
     .logo{

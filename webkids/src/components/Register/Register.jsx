@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faApple } from '@fortawesome/free-brands-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './Register.module.css';
 
@@ -11,6 +12,7 @@ function Register() {
     const [lastName, setLastName] = useState('');
     const [birthdate, setBirthdate] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     const handleRegister = async (event) => {
         event.preventDefault();
@@ -48,38 +50,42 @@ function Register() {
     const handleLoginWithApple = () => {
         console.log('Anmeldung mit Apple');
     };
+    
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
 
     return (
         <div className={styles.Register_container}>
             <Link to="/navbar" className={styles.logoLink}>
-            <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
+                <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
             </Link>
             <div className={styles.Register_box}>
                 <div className={styles.Register_image}></div>
                 <div className={styles.Register_content}>
                     <h1>Registrieren</h1>
                     <form onSubmit={handleRegister}>
-                    <input
-                        type="email"
-                        placeholder="E-Mail"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Vorname"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Nachname"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                    />
+                        <input
+                            type="email"
+                            placeholder="E-Mail"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Vorname"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Nachname"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                        />
                         <label>Geburtsdatum:</label>
                         <input 
                             type="date" 
@@ -87,12 +93,20 @@ function Register() {
                             onChange={(e) => setBirthdate(e.target.value)} 
                             required 
                         />
-                        <input type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                        <div className={styles.passwordContainer}>
+                            <input
+                                type={passwordVisible ? "text" : "password"}
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <FontAwesomeIcon
+                                icon={passwordVisible ? faEye : faEyeSlash}
+                                onClick={togglePasswordVisibility}
+                                className={styles.eyeIcon}
+                            />
+                        </div>
                         <button type="submit">Registrieren</button>
                     </form>
                     <hr />
