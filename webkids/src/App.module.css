@@ -1,5 +1,17 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   text-align: center;
+  background-color: white;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .App-logo {

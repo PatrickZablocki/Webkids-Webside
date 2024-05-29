@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faApple } from '@fortawesome/free-brands-svg-icons';
@@ -13,6 +14,14 @@ function Register() {
     const [birthdate, setBirthdate] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
+=======
+import React from "react";
+
+function Register() {
+  const handleRegister = (event) => {
+    event.preventDefault();
+  };
+>>>>>>> Timo
 
     const handleRegister = async (event) => {
         event.preventDefault();
