@@ -12,14 +12,15 @@ import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import CookieConsent from "./components/CookieConsent/CookieConsent";
 import styles from "./App.module.css";
 
+
 function App() {
   return (
     <Router>
       <div className={styles.App} id="root">
+        <Navbar /> {/* Navbar hier außerhalb von Routes */}
         <div className={styles.content}>
           <Routes>
             <Route path="/" element={<div>Home Inhalt</div>} />
-            <Route path="/navbar" element={<Navbar />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/cookies" element={<Cookies />} />
@@ -35,5 +36,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
