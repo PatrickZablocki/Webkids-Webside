@@ -18,7 +18,7 @@ function App() {
       <div className={styles.App} id="root">
         <div className={styles.content}>
           <Routes>
-            <Route path="/" element={<div>Home Inhalt</div>} />
+          <Route path="/" element={<div>Home Inhalt</div>} />
             <Route path="/navbar" element={<Navbar />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
