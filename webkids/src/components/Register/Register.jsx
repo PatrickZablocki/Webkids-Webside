@@ -13,6 +13,7 @@ function Register() {
     const [birthdate, setBirthdate] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [error, setError] = useState('');
 
     const handleRegister = async (event) => {
         event.preventDefault();
@@ -36,9 +37,11 @@ function Register() {
                 navigate('/login');
             } else {
                 const data = await response.json();
+                setError(data.message);
                 console.error('Registration failed:', data.message);
             }
         } catch (error) {
+            setError('An error occurred. Please try again.');
             console.error('Error:', error);
         }
     };
@@ -50,7 +53,7 @@ function Register() {
     const handleLoginWithApple = () => {
         console.log('Anmeldung mit Apple');
     };
-    
+
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
@@ -109,6 +112,7 @@ function Register() {
                         </div>
                         <button type="submit">Registrieren</button>
                     </form>
+                    {error && <p className={styles.error}>{error}</p>}
                     <hr />
                     <div className={styles.Register_Social}>
                         <button className={styles.google_button} onClick={handleLoginWithGoogle}>
@@ -120,7 +124,7 @@ function Register() {
                             Mit Apple registrieren
                         </button>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className={styles.Register_toRegister}>
                         <p>Du besitzt bereits einen Account? <Link to="/login">Anmelden</Link></p>
                     </div>
