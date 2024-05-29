@@ -21,8 +21,10 @@
 
 /* Footer Logo */
 .footerLogo {
-  height: 50px;
+  height: 100px;
   margin-right: 20px;
+  border: 1px solid white;
+  border-radius: 50%;
 }
 
 /* Footer Navigation */

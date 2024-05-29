@@ -6,11 +6,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
-        <img
-          src="/Logo/Logo_Webkids.png"
-          alt="Logo"
-          className={styles.footerLogo}
-        />
+        <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.footerLogo}/>
         <ul>
           <li>
             <Link to="/cookies">Cookies</Link>

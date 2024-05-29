@@ -1,25 +1,27 @@
 .Navbar_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    width: 98%;
-    position: fixed;
-    border-radius: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  width: 98%;
+  position: fixed;
+  top: 0; /* Hinzugefügt */
+  border-radius: 40px;
+  z-index: 1000; /* Hinzugefügt, um sicherzustellen, dass die Navbar oben bleibt */
 }
 
 .logo {
-    width: 150px;
-    border: 1px solid grey;
-    border-radius:50%;
+  width: 150px;
+  border: 1px solid grey;
+  border-radius: 50%;
 }
 
 .search_bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .search_bar input[type="text"] {
@@ -30,13 +32,13 @@
 }
 
 .search_bar button {
-    padding: 5px 10px;
-    background-color: #666;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 19px;
+  padding: 5px 10px;
+  background-color: #666;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 19px;
 }
 
 .nav_icons {
@@ -83,34 +85,36 @@
   align-items: center;
   margin-inline-start: 12px;
 }
+
 .nav_icons.show {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    right: 10px;
-    background-color: #222;
-    width: auto;
-    padding: 10px;
-    z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  background-color: #222;
+  width: auto;
+  padding: 10px;
+  z-index: 1000;
 }
+
 /* Hier beginnen die Media Queries für die mobile Ansicht */
 @media only screen and (max-width: 768px) {
-    .menu_icon {
-        display: block;
-        margin-right: 20px;
-    }
+  .menu_icon {
+      display: block;
+      margin-right: 20px;
+  }
 
   .nav_icons {
-    display: none;
+      display: none;
   }
 
   .menu_icon.show + .nav_icons {
-    display: flex;
-    flex-direction: column;
+      display: flex;
+      flex-direction: column;
   }
 
   .menu_icon.show .menu_line {
-    background-color: white;
+      background-color: white;
   }
 }
