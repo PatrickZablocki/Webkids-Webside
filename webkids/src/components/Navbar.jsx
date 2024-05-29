@@ -1,19 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUserFriends, faEnvelope, faBell, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from './Navbar.module.css';
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faUserFriends,
-  faEnvelope,
-  faBell,
-  faBars,
-} from "@fortawesome/free-solid-svg-icons";
-import styles from "./Navbar.module.css";
+import React, { useState } from "react";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -26,7 +15,7 @@ const Navbar = () => {
   return (
     <div>
       <div className={styles.Navbar_container}>
-        <img src="/Logo/Logo_Webkids.png" alt="Logo" className={styles.logo} />
+        <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
 
         <div className={styles.search_bar}>
           <input type="text" placeholder="Suche..." />
