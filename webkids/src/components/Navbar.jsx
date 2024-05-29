@@ -1,8 +1,3 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUserFriends, faEnvelope, faBell, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import styles from './Navbar.module.css';
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,9 +7,9 @@ import {
   faEnvelope,
   faBell,
   faBars,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Navbar.module.css";
-
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const isLoggedIn = false;
