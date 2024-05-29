@@ -13,6 +13,7 @@ function Register() {
   const [birthdate, setBirthdate] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [error, setError] = useState("");
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -36,9 +37,11 @@ function Register() {
         navigate("/login");
       } else {
         const data = await response.json();
+        setError(data.message);
         console.error("Registration failed:", data.message);
       }
     } catch (error) {
+      setError("An error occurred. Please try again.");
       console.error("Error:", error);
     }
   };
@@ -113,6 +116,7 @@ function Register() {
             </div>
             <button type="submit">Registrieren</button>
           </form>
+          {error && <p className={styles.error}>{error}</p>}
           <hr />
           <div className={styles.Register_Social}>
             <button
