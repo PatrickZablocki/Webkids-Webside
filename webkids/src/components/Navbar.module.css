@@ -9,22 +9,26 @@
     position: fixed;
     border-radius: 40px;
 }
+
 .logo {
     width: 150px;
     border: 1px solid grey;
     border-radius:50%;
 }
+
 .search_bar {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .search_bar input[type="text"] {
-    padding: 5px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
+
 .search_bar button {
     padding: 5px 10px;
     background-color: #666;
@@ -34,43 +38,50 @@
     cursor: pointer;
     margin-bottom: 19px;
 }
+
 .nav_icons {
-    display: flex;
-    text-align: center;
-    margin-right: 60px;
+  display: flex;
+  text-align: center;
+  margin-right: 60px;
 }
+
 .nav_icons:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
-.nav_icons a{
-    display: block;
-    font-size: 0.875rem;
-    color: #fff;
-    text-decoration: none;
+
+.nav_icons a {
+  display: block;
+  font-size: 0.875rem;
+  color: #fff;
+  text-decoration: none;
 }
+
 .nav_icons a:hover {
-    text-decoration: underline;
-    color: #d43333;
+  text-decoration: underline;
+  color: #d43333;
 }
+
 .icon {
-    margin-right: 10px;
-    font-size: 1.2rem;
-    margin-inline-start: 40px;
+  margin-right: 10px;
+  font-size: 1.2rem;
+  margin-inline-start: 40px;
 }
+
 .menu_icon {
-    display: none;
-    cursor: pointer;
+  display: none;
+  cursor: pointer;
 }
-.login_register{
-    display: flex;
-    
+
+.login_register {
+  display: flex;
 }
-.login_register li{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-inline-start: 12px;
+
+.login_register li {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-inline-start: 12px;
 }
 .nav_icons.show {
     display: flex;
@@ -90,29 +101,16 @@
         margin-right: 20px;
     }
 
-    .nav_icons {
-        display: none;
-    }
+  .nav_icons {
+    display: none;
+  }
 
-    .menu_icon.show + .nav_icons {
-        display: flex;
-        flex-direction: column;
-    }
+  .menu_icon.show + .nav_icons {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .menu_icon.show .menu_line {
-        background-color: white;
-    }
-    .nav_icons.show {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 50px;
-        right: 10px;
-        background-color: #92919145;
-        width: auto;
-        padding: 10px;
-        z-index: 1000;
-        border-radius: 30px;
-    }
-    
+  .menu_icon.show .menu_line {
+    background-color: white;
+  }
 }

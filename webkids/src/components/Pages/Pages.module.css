@@ -1,0 +1,17 @@
+/* Pages.module.css */
+.page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.page h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.page p {
+  font-size: 1.2em;
+  line-height: 1.6;
+}
