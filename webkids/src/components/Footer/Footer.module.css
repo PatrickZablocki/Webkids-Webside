@@ -3,10 +3,15 @@
   background-color: #333;
   color: white;
   padding: 20px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 40px;
+  overflow: hidden;
+  overflow-y: hidden;
+  z-index: 1000;
 }
 
 /* Footer Content */
@@ -47,7 +52,7 @@
 .footer ul li a {
   text-decoration: none;
   color: white;
-  font-size: 16px;
+  font-size: 1.125rem;
   transition: color 0.3s ease;
 }
 
@@ -58,7 +63,7 @@
 /* Footer Text */
 .footer div {
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 1.125rem;
   text-align: center;
   width: 100%;
   box-sizing: border-box;

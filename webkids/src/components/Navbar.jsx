@@ -1,16 +1,26 @@
+import React, { useState, useEffect } from "react";
 import { faHome, faUserFriends, faEnvelope, faBell, faBars } from '@fortawesome/free-solid-svg-icons';
-import styles from './Navbar.module.css';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import styles from './Navbar.module.css';
+import { Newsletter } from './Newsletter/Newsletter';
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [showNewsletter, setShowNewsletter] = useState(false);
   const isLoggedIn = false;
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+
+  const closeNewsletter = () => {
+    setShowNewsletter(false);
+  };
+
+  useEffect(() => {
+    setShowNewsletter(true);
+  }, []);
 
   return (
     <div>
@@ -25,19 +35,19 @@ const Navbar = () => {
         <div className={`${styles.nav_icons} ${showMenu ? styles.show : ""}`}>
           <span className={styles.icon}>
             <FontAwesomeIcon icon={faHome} />
-            <Link to="/">Start</Link>
+            <Link to="/navbar">Start</Link>
           </span>
           <span className={styles.icon}>
             <FontAwesomeIcon icon={faUserFriends} />
-            <Link to="/network">Ihr Netzwerk</Link>
+            <Link to="/navbar">Ihr Netzwerk</Link>
           </span>
           <span className={styles.icon}>
             <FontAwesomeIcon icon={faEnvelope} />
-            <Link to="/messages">Nachrichten</Link>
+            <Link to="/navbar">Nachrichten</Link>
           </span>
           <span className={styles.icon}>
             <FontAwesomeIcon icon={faBell} />
-            <Link to="/notifications">Mitteilungen</Link>
+            <Link to="/navbar">Mitteilungen</Link>
           </span>
           {isLoggedIn ? (
             <span className={styles.profile_picture}></span>
@@ -57,6 +67,7 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faBars} />
         </div>
       </div>
+      <Newsletter show={showNewsletter} onClose={closeNewsletter} />
     </div>
   );
 };

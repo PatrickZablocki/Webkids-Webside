@@ -6,10 +6,12 @@
   background-color: #333;
   color: white;
   width: 98%;
+  height: auto;
   position: fixed;
-  top: 0; /* Hinzugefügt */
+  margin-top: 10px;
+  top:0;
   border-radius: 40px;
-  z-index: 1000; /* Hinzugefügt, um sicherzustellen, dass die Navbar oben bleibt */
+  z-index: 1000;
 }
 
 .logo {
@@ -108,10 +110,14 @@
   .nav_icons {
       display: none;
   }
-
+  .nav_icons.show{
+    border: 1px solid #fff;
+    border-radius: 20px;
+  }
   .menu_icon.show + .nav_icons {
       display: flex;
       flex-direction: column;
+      
   }
 
   .menu_icon.show .menu_line {
