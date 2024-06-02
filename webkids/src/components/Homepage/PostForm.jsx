@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import postform from './postform.module.css'
 
 function PostForm({ onNewPost }) {
   const [text, setText] = useState('');
@@ -36,15 +37,15 @@ function PostForm({ onNewPost }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
       <textarea
         placeholder="What's on your mind?"
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+      {/* <input type="file" onChange={(e) => setFile(e.target.files[0])} /> */}
       <button type="submit">Post</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className={postform.error} style={{ color: 'red' }}>{error}</p>}
     </form>
   );
 }

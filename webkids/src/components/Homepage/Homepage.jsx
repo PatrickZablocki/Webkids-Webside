@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PostForm from './PostForm';
 import PostList from './PostList';
 import home from './home.module.css'
+import Navbar from '../Navbar'
 
 
 export default function Dashboard() {
@@ -51,8 +52,8 @@ export default function Dashboard() {
 
     return (
         <>
-            <Navbar />
-            <div className={home.main} >
+           <div className={home.body}>
+           <div className={home.main} >
                 <PostForm onNewPost={addNewPost} />
                 <PostList posts={posts} onDeletePost={deletePost} />
                 {/* <InputGroup className={dash.main} >
@@ -70,6 +71,7 @@ export default function Dashboard() {
                     </Button>
                 </InputGroup> */}
             </div>
+           </div>
         </>
     )
 }
