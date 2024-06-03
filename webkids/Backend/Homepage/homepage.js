@@ -5,11 +5,11 @@ const multer = require('multer');
 const cors = require('cors');
 const path = require('path');
 
-const app = express();
+const postApp = express();
 
-app.use(express.json());
-app.use(cors());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+postApp.use(express.json());
+postApp.use(cors());
+postApp.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI, {
@@ -19,7 +19,6 @@ mongoose.connect(mongoURI, {
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-
 const postSchema = new mongoose.Schema({
   text: String,
   filePath: String,
@@ -27,7 +26,6 @@ const postSchema = new mongoose.Schema({
 });
 
 const Post = mongoose.model('Post', postSchema);
-
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -40,8 +38,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
-app.post('/api/posts', upload.single('file'), (req, res) => {
+postApp.post('/api/posts', upload.single('file'), (req, res) => {
   const newPost = new Post({
     text: req.body.text,
     filePath: req.file ? req.file.path : null
@@ -55,7 +52,7 @@ app.post('/api/posts', upload.single('file'), (req, res) => {
     });
 });
 
-app.delete('/api/posts/:id', (req, res) => {
+postApp.delete('/api/posts/:id', (req, res) => {
   const postId = req.params.id;
 
   Post.findByIdAndDelete(postId)
@@ -66,13 +63,10 @@ app.delete('/api/posts/:id', (req, res) => {
     });
 });
 
-
-app.get('/api/posts', (req, res) => {
+postApp.get('/api/posts', (req, res) => {
   Post.find().sort({ createdAt: -1 })
     .then(posts => res.json(posts))
     .catch(err => res.status(500).json({ error: err.message }));
 });
 
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = postApp;
