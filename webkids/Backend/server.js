@@ -105,5 +105,21 @@ app.post('/subscribe', async (req, res) => {
     }
 });
 
+// Get user information
+app.get('/user', async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(token, 'your_jwt_secret');
+        const user = await User.findById(decoded.userId).select('-password'); // exclude password field
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(user);
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

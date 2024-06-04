@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { faHome, faUserFriends, faEnvelope, faBell, faBars } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from './Navbar.module.css';
 import { Newsletter } from './Newsletter/Newsletter';
@@ -8,7 +8,9 @@ import { Newsletter } from './Newsletter/Newsletter';
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showNewsletter, setShowNewsletter] = useState(false);
-  const isLoggedIn = false;
+  const [user, setUser] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -20,7 +22,39 @@ const Navbar = () => {
 
   useEffect(() => {
     setShowNewsletter(true);
+    fetchUserInfo();
   }, []);
+
+  const fetchUserInfo = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const response = await fetch('http://localhost:5000/user', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data);
+        } else {
+          console.error('Failed to fetch user info:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    navigate('/login');
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
 
   return (
     <div>
@@ -49,8 +83,22 @@ const Navbar = () => {
             <FontAwesomeIcon icon={faBell} />
             <Link to="/navbar">Mitteilungen</Link>
           </span>
-          {isLoggedIn ? (
-            <span className={styles.profile_picture}></span>
+          {user ? (
+            <div className="dropdown_container">
+            <span className={styles.profile_picture} onClick={toggleMenu}>
+              {user.firstName} {user.lastName}
+            </span>
+            {showMenu && (
+              <div className="dropdown_menu">
+                <li>
+                  <a href="">Profil Bearbeiten</a>
+                  <a href="">Einstellungen</a>
+                  <a href="">Newsletter</a>
+                </li>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+              )}
+            </div>
           ) : (
             <span className={styles.login_register}>
               <li>

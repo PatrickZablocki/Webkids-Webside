@@ -99,7 +99,56 @@
   padding: 10px;
   z-index: 1000;
 }
+/* Einstellung wenn man eingelogt ist */
+.dropdown_container {
+  position: relative;
+  display: inline-block;
+}
 
+.dropdown_menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.dropdown_menu ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.dropdown_menu a,
+.dropdown_menu button {
+  display: block;
+  padding: 10px;
+  text-align: left;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown_menu button {
+  margin-top: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.dropdown_menu button:hover {
+  background-color: darkred;
+}
+
+/* Show the dropdown menu with animation */
+.dropdown_container.active .dropdown_menu {
+  display: block;
+}
 /* Hier beginnen die Media Queries für die mobile Ansicht */
 @media only screen and (max-width: 768px) {
   .menu_icon {
