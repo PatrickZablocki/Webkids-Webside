@@ -54,6 +54,32 @@ app.post('/register', async (req, res) => {
 });
 
 // Login
+// app.post('/login', async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
+
+//         if (!email || !password) {
+//             return res.status(400).json({ message: 'Email and password are required' });
+//         }
+
+//         const user = await User.findOne({ email });
+//         if (!user) {
+//             return res.status(400).json({ message: 'User not found' });
+//         }
+
+//         const isPasswordValid = await bcrypt.compare(password, user.password);
+//         if (!isPasswordValid) {
+//             return res.status(400).json({ message: 'Invalid password' });
+//         }
+
+//         const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+
+//         res.status(200).json({ message: 'Login successful', token });
+//     } catch (error) {
+//         console.error('Error during login:', error);
+//         res.status(500).json({ message: 'Internal server error' });
+//     }
+// });
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -74,7 +100,20 @@ app.post('/login', async (req, res) => {
 
         const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
 
-        res.status(200).json({ message: 'Login successful', token });
+        
+        const existingSubscriber = await Subscriber.findOne({ email });
+        let showNewsletterPopup = false;
+        if (!existingSubscriber) {
+            
+            showNewsletterPopup = true;
+        }
+
+        
+        res.status(200).json({ 
+            message: 'Login successful', 
+            token, 
+            showNewsletterPopup 
+        });
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ message: 'Internal server error' });
@@ -110,7 +149,7 @@ app.get('/user', async (req, res) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
         const decoded = jwt.verify(token, 'your_jwt_secret');
-        const user = await User.findById(decoded.userId).select('-password'); // exclude password field
+        const user = await User.findById(decoded.userId).select('-password');
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }

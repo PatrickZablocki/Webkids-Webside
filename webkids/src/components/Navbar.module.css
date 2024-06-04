@@ -145,7 +145,7 @@
   background-color: darkred;
 }
 
-/* Show the dropdown menu with animation */
+
 .dropdown_container.active .dropdown_menu {
   display: block;
 }

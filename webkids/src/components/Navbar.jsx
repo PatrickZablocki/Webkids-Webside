@@ -91,9 +91,9 @@ const Navbar = () => {
             {showMenu && (
               <div className="dropdown_menu">
                 <li>
-                  <a href="">Profil Bearbeiten</a>
-                  <a href="">Einstellungen</a>
-                  <a href="">Newsletter</a>
+                  <a href="">Konto</a>
+                  <a href="">Einstellungen & Datenschutz</a>
+                  <a href="">Hilfe</a>
                 </li>
                 <button onClick={handleLogout}>Logout</button>
               </div>
