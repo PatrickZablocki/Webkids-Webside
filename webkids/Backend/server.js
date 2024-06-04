@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const User = require('./models/user');
+const Subscriber = require('./models/subscriber');
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ mongoose.connect(mongoURL, {
     console.error('Error connecting to MongoDB:', error);
 });
 
+// Registrierung
 app.post('/register', async (req, res) => {
     try {
         const { email, firstName, lastName, birthdate, password } = req.body;
@@ -51,6 +53,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
+// Login
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -74,6 +77,30 @@ app.post('/login', async (req, res) => {
         res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
         console.error('Error during login:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Newsletter-Abonnement
+app.post('/subscribe', async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({ message: 'Email is required' });
+        }
+
+        const existingSubscriber = await Subscriber.findOne({ email });
+        if (existingSubscriber) {
+            return res.status(400).json({ message: 'Already subscribed' });
+        }
+
+        const newSubscriber = new Subscriber({ email });
+        await newSubscriber.save();
+
+        res.status(201).json({ message: 'Subscribed successfully' });
+    } catch (error) {
+        console.error('Error during subscription:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
