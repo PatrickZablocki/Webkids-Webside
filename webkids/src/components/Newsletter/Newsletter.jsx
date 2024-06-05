@@ -38,15 +38,35 @@ export const Newsletter = () => {
         }
     };
 
+    const declineNewsletter = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/decline-newsletter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }), // Hier wird die E-Mail-Adresse des Benutzers übergeben
+            });
+
+            if (!response.ok) {
+                throw new Error('Fehler beim Ablehnen des Newsletters');
+            }
+
+            setShow(false);
+        } catch (error) {
+            console.error('Fehler:', error);
+            setError('Es gab ein Problem beim Ablehnen. Bitte versuche es später erneut.');
+        }
+    };
+
     const handleSubscribe = async (e) => {
         e.preventDefault();
         await subscribeToNewsletter(email);
         setShow(false);
     };
 
-    const handleClose = () => {
-        setShow(false);
-        localStorage.setItem('newsletterDismissed', 'true');
+    const handleClose = async () => {
+        await declineNewsletter();
     };
 
     if (!show) {
@@ -73,7 +93,7 @@ export const Newsletter = () => {
                     </form>
                     {error && <p className={styles.error}>{error}</p>}
                     {success && <p className={styles.success}>{success}</p>}
-                    <button onClick={handleClose} className={styles.close}>Schließen</button>
+                    <button onClick={handleClose} className={styles.close}>Ablehnen</button>
                     <p>Melde dich an, um exklusive Updates, spannende Neuigkeiten und besondere Angebote direkt in deinem Posteingang zu erhalten. Sei der Erste, der von unseren neuesten Inhalten und Aktionen erfährt!</p>
                 </div>
             </div>

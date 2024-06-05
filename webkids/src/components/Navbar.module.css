@@ -100,12 +100,12 @@
   z-index: 1000;
 }
 /* Einstellung wenn man eingelogt ist */
-.dropdown_container {
+.dropdown_container  {
   position: relative;
   display: inline-block;
 }
 
-.dropdown_menu {
+.dropdown_menu li > a  {
   display: none;
   position: absolute;
   background-color: white;
@@ -116,10 +116,13 @@
   border-radius: 10px;
 }
 
-.dropdown_menu ul {
+.dropdown_menu li {
   padding: 0;
   margin: 0;
   list-style-type: none;
+}
+.dropdown_menu a{
+  color: #fff;
 }
 
 .dropdown_menu a,
@@ -127,7 +130,7 @@
   display: block;
   padding: 10px;
   text-align: left;
-  color: black;
+  color: #fff;
   text-decoration: none;
   cursor: pointer;
 }
@@ -145,10 +148,10 @@
   background-color: darkred;
 }
 
-
-.dropdown_container.active .dropdown_menu {
+/* .dropdown_container.active .dropdown_menu {
   display: block;
-}
+} */
+
 /* Hier beginnen die Media Queries für die mobile Ansicht */
 @media only screen and (max-width: 768px) {
   .menu_icon {

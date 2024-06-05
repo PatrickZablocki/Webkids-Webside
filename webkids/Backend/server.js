@@ -26,12 +26,12 @@ app.post('/register', async (req, res) => {
         const { email, firstName, lastName, birthdate, password } = req.body;
 
         if (!email || !firstName || !lastName || !birthdate || !password) {
-            return res.status(400).json({ message: 'All fields are required' });
+            return res.status(400).json({ message: 'Alle Felder sind erforderlich' });
         }
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
+            return res.status(400).json({ message: 'Benutzer existiert bereits' });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -46,40 +46,13 @@ app.post('/register', async (req, res) => {
 
         await newUser.save();
 
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'Benutzer erfolgreich registriert' });
     } catch (error) {
-        console.error('Error during registration:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        console.error('Fehler bei der Registrierung:', error); // Verbesserte Protokollierung
+        res.status(500).json({ message: 'Interner Serverfehler', error: error.message }); // Mehr Details bereitstellen
     }
 });
-
 // Login
-// app.post('/login', async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
-
-//         if (!email || !password) {
-//             return res.status(400).json({ message: 'Email and password are required' });
-//         }
-
-//         const user = await User.findOne({ email });
-//         if (!user) {
-//             return res.status(400).json({ message: 'User not found' });
-//         }
-
-//         const isPasswordValid = await bcrypt.compare(password, user.password);
-//         if (!isPasswordValid) {
-//             return res.status(400).json({ message: 'Invalid password' });
-//         }
-
-//         const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
-
-//         res.status(200).json({ message: 'Login successful', token });
-//     } catch (error) {
-//         console.error('Error during login:', error);
-//         res.status(500).json({ message: 'Internal server error' });
-//     }
-// });
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -121,7 +94,7 @@ app.post('/login', async (req, res) => {
 });
 
 // Newsletter-Abonnement
-app.post('/subscribe', async (req, res) => {
+app.post('/decline-newsletter', async (req, res) => {
     try {
         const { email } = req.body;
 
@@ -129,13 +102,15 @@ app.post('/subscribe', async (req, res) => {
             return res.status(400).json({ message: 'Email is required' });
         }
 
-        const existingSubscriber = await Subscriber.findOne({ email });
-        if (existingSubscriber) {
+        const existingUser = await User.findOne({ email });
+        if (!existingUser) {
             return res.status(400).json({ message: 'Already subscribed' });
         }
 
-        const newSubscriber = new Subscriber({ email });
-        await newSubscriber.save();
+        // const newSubscriber = new Subscriber({ email });
+        // await newSubscriber.save();
+        existingUser.newsletterDeclined = true;
+        await existingUser.save();
 
         res.status(201).json({ message: 'Subscribed successfully' });
     } catch (error) {
