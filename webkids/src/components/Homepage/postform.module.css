@@ -1,39 +1,66 @@
 form {
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  textarea {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none;
-    height: 100px;
-  }
-  
-  /* input {
-    margin-bottom: 10px;
-  }
-   */
-  button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .error {
-    color: red;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-bottom: 1rem
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.delete {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+span {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.deleteButton {
+  padding: 0.25rem 0.5rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+}
+
+.postButton {
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.postButton:hover {
+  background-color: white;
+  color: black;
+}
+
+.error {
+  color: red;
+}
