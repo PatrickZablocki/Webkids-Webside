@@ -1,0 +1,43 @@
+.logo {
+    width: 150px;
+    border: 1px solid grey;
+    border-radius: 50%;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.Konto_container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-left: 200px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Konto_headline {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.user_info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user_info h2 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.user_info p {
+    font-size: 18px;
+    color: #777;
+    margin: 0;
+}
