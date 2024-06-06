@@ -4,6 +4,7 @@ import postform from './postform.module.css'
 function PostForm({ onNewPost }) {
   const [text, setText] = useState('');
   const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState('');
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -35,6 +36,7 @@ function PostForm({ onNewPost }) {
       onNewPost(newPost);
       setText('');
       setFile(null);
+      setFileName('');
       setError(null);
     } catch (error) {
       setError(error.message);
@@ -43,35 +45,44 @@ function PostForm({ onNewPost }) {
   };
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setFileName(selectedFile ? selectedFile.name : '');
   };
 
   const handleRemoveFile = () => {
     setFile(null);
+    setFileName('');
   };
 
 
+
   return (
-    <form onSubmit={handleSubmit}>
-    <textarea
-      placeholder="What's on your mind?"
-      value={text}
-      onChange={(e) => setText(e.target.value)}
-      required
-    />
-    <input
-      type="file"
-      onChange={handleFileChange}
-    />
-    {file && (
-      <div className={postform.delete} >
-        <span>{file.name}</span>
-        <button type={postform.deleteButton} onClick={handleRemoveFile}>Delete</button>
+    <form className={postform.form} onSubmit={handleSubmit}>
+      <textarea
+        className={postform.textarea}
+        placeholder="What's on your mind?"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        required
+      />
+      <div className={postform.fileInputWrapper} >
+        <input
+          className={postform.fileInput}
+          type="file"
+          onChange={handleFileChange}
+        />
+        <button type="button" className={postform.customFileButton} >Add Photo/Video</button>
       </div>
-    )}
-    <button className={postform.postButton} type="submit">Post</button>
-    {error && <p className={postform.error} >{error}</p>}
-  </form>
+      {fileName && (
+        <div className={postform.filePreview} >
+          <span>{fileName}</span>
+          <button type="button" onClick={handleRemoveFile}>Delete</button>
+        </div>
+      )}
+      <button className={postform.button} type="submit">Post</button>
+      {error && <p className={postform.errorMessage} >{error}</p>}
+    </form>
   );
 }
 
