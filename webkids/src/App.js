@@ -11,6 +11,7 @@ import Help from "./components/Pages/Help";
 import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import CookieConsent from "./components/CookieConsent/CookieConsent";
 import styles from "./App.module.css";
+import { Newsletter } from "./components/Newsletter/Newsletter";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/help" element={<Help />} />
             <Route path="/datenschutzerklaerung" element={<PrivacyPolicy />} />
+            <Route path="/newsletter" element={<Newsletter/>}/>
           </Routes>
         </div>
         <Footer />

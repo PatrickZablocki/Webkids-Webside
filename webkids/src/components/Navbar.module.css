@@ -100,20 +100,22 @@
   z-index: 1000;
 }
 /* Einstellung wenn man eingelogt ist */
-.dropdown_container  {
+.dropdown_container {
   position: relative;
   display: inline-block;
+  margin-top:20px;
+  margin-left: 10px;
 }
-
-.dropdown_menu li > a  {
-  display: none;
-  position: absolute;
-  background-color: white;
+.dropdown_menu li  {
+  display: block;
+  position: relative;
+  background-color: #222;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
   right: 0;
   padding: 10px;
   border-radius: 10px;
+  color: #fff;
+  border: 1px solid #fff;
 }
 
 .dropdown_menu li {
@@ -121,7 +123,8 @@
   margin: 0;
   list-style-type: none;
 }
-.dropdown_menu a{
+
+.dropdown_menu a {
   color: #fff;
 }
 
@@ -130,7 +133,6 @@
   display: block;
   padding: 10px;
   text-align: left;
-  color: #fff;
   text-decoration: none;
   cursor: pointer;
 }
@@ -147,10 +149,6 @@
 .dropdown_menu button:hover {
   background-color: darkred;
 }
-
-/* .dropdown_container.active .dropdown_menu {
-  display: block;
-} */
 
 /* Hier beginnen die Media Queries für die mobile Ansicht */
 @media only screen and (max-width: 768px) {
