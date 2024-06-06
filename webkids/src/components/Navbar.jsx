@@ -90,11 +90,9 @@ const Navbar = () => {
               </span>
               {showDropdown && (
                 <div className={styles.dropdown_menu}>
-                  <li>
-                    <a href="">Konto</a>
-                    <a href="">Einstellungen & Datenschutz</a>
-                    <a href="">Hilfe</a>
-                  </li>
+                  <Link to="/konto" className={styles.dropdown_link}>Konto</Link>
+                  <Link to="/datenschutzerklaerung" className={styles.dropdown_link}>Einstellungen & Datenschutz</Link>
+                  <Link to="/help" className={styles.dropdown_link}>Hilfe</Link>
                   <button onClick={handleLogout}>Logout</button>
                 </div>
               )}
