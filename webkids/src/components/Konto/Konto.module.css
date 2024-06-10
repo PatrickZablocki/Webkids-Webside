@@ -1,18 +1,57 @@
 .logo {
-    width: 150px;
+    width: 75px;
     border: 1px solid grey;
     border-radius: 50%;
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 10px;
+    left: 5px;
     z-index: 1000;
+    margin-left: 65px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #f4f4f4;
+    padding-top: 60px;
+}
+
+.sidebar_links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+    margin-top: 50px;
+}
+
+.sidebar_links a {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar_links a:hover {
+    background-color: #ddd;
+}
+
+.main_content {
+    position: absolute;
+    margin-left: 200px; 
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .Konto_container {
-    max-width: 800px;
-    margin: 0 auto;
+    width: 1700px;
+    height: 1000px;
     padding: 20px;
-    padding-left: 200px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

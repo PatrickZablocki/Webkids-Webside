@@ -28,20 +28,30 @@ const Konto = () => {
     }, []);
 
     return (
-        <div>
-            <Link to="/navbar"> 
-                <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
-            </Link>
-            <div className={styles.Konto_container}>
-                <h1 className={styles.Konto_headline}>Dein Konto</h1>
-                {userData && (
-                    <div className={styles.user_info}>
-                        <p>Name: {userData.firstName} {userData.lastName}</p>
-                        <p>Email: {userData.email}</p>
-                        <p>Geburtstag: {userData.birthdate}</p>
-                        
-                    </div>
-                )}
+        <div className={styles.sidebar}>
+            <div className={styles.sidebar_links}>
+                <Link to="/beiträge">Beiträge</Link>
+                <Link to="/info">Info</Link>
+                <Link to="/freunde">Freunde</Link>
+                <Link to="/fotos">Fotos</Link>
+                <Link to="/videos">Videos</Link>
+                <Link to="/bsuche">Besuche</Link>
+            </div>
+            <div className={styles.main_content}>
+                <Link to="/navbar"> 
+                    <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
+                </Link>
+                <div className={styles.Konto_container}>
+                    <h1 className={styles.Konto_headline}>Dein Konto</h1>
+                    {userData && (
+                        <div className={styles.user_info}>
+                            <p>Name: {userData.firstName} {userData.lastName}</p>
+                            <p>Email: {userData.email}</p>
+                            <p>Geburtstag: {userData.birthdate}</p>
+                            
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
