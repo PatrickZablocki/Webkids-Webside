@@ -1,8 +1,9 @@
-import { faHome, faUserFriends, faEnvelope, faBell, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUserFriends, faEnvelope, faBell, faBars } from '@fortawesome/free-solid-svg-icons';
 import styles from './Navbar.module.css';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);

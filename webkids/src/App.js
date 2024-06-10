@@ -12,6 +12,7 @@ import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import CookieConsent from "./components/CookieConsent/CookieConsent";
 import styles from "./App.module.css";
 import Homepage from './components/Homepage/Homepage'
+import Chat from "./components/Chat/Chat";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/messages" element={<Chat />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/cookie-settings" element={<CookieSettings />} />
             <Route path="/impressum" element={<Impressum />} />
