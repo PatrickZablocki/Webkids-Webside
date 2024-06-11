@@ -13,6 +13,12 @@ import CookieConsent from "./components/CookieConsent/CookieConsent";
 import styles from "./App.module.css";
 import { Newsletter } from "./components/Newsletter/Newsletter";
 import Konto from "./components/Konto/Konto";
+import Beiträge from "./components/ProfilePages/Beiträge/Beiträge";
+import Info from "./components/ProfilePages/info/info";
+import Freunde from "./components/ProfilePages/freunde/freunde";
+import Fotos from "./components/ProfilePages/fotos/fotos";
+import Videos from "./components/ProfilePages/videosPage/Videos";
+import Besuche from "./components/ProfilePages/besuche/besuche";
 
 function App() {
   return (
@@ -31,6 +37,12 @@ function App() {
             <Route path="/datenschutzerklaerung" element={<PrivacyPolicy />} />
             <Route path="/konto" element={<Konto />} />
             <Route path="/newsletter" element={<Newsletter/>}/>
+            <Route path="/beiträge" element={<Beiträge/>}/>
+            <Route path="/info" element={<Info/>}/>
+            <Route path="/freunde" element={<Freunde/>}/>
+            <Route path="/fotos" element={<Fotos/>}/>
+            <Route path="/videos" element={<Videos/>}/>
+            <Route path="/besuche" element={<Besuche/>}/>
           </Routes>
         </div>
         <Footer />

@@ -1,0 +1,82 @@
+.logo {
+    width: 75px;
+    border: 1px solid grey;
+    border-radius: 50%;
+    position: fixed;
+    top: 10px;
+    left: 5px;
+    z-index: 1000;
+    margin-left: 65px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #f4f4f4;
+    padding-top: 60px;
+}
+
+.sidebar_links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+    margin-top: 50px;
+}
+
+.sidebar_links a {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar_links a:hover {
+    background-color: #ddd;
+}
+
+.main_content {
+    position: absolute;
+    margin-left: 200px; 
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Fotos_container {
+    width: 1700px;
+    height: 1000px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Fotos_headline {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.user_info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user_info h2 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.user_info p {
+    font-size: 18px;
+    color: #777;
+    margin: 0;
+}

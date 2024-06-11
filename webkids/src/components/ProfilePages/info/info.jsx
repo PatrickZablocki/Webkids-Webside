@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Konto.module.css';
+import styles from './info.module.css';
 import { Link } from 'react-router-dom';
 
-const Konto = () => {
+const Info = () => {
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
@@ -26,8 +26,8 @@ const Konto = () => {
 
         fetchUserData();
     }, []);
-
     return (
+    <div>
         <div className={styles.sidebar}>
             <div className={styles.sidebar_links}>
                 <Link to="/beiträge">Beiträge</Link>
@@ -41,20 +41,18 @@ const Konto = () => {
                 <Link to="/navbar"> 
                     <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
                 </Link>
-                <div className={styles.Konto_container}>
-                    <h1 className={styles.Konto_headline}>Dein Konto</h1>
+                <div className={styles.Info_container}>
+                    <h1 className={styles.Info_headline}>Deine Infos</h1>
                     {userData && (
                         <div className={styles.user_info}>
-                            <p>Name: {userData.firstName} {userData.lastName}</p>
-                            <p>Email: {userData.email}</p>
-                            <p>Geburtstag: {userData.birthdate}</p>
-                            
+                        
                         </div>
                     )}
                 </div>
             </div>
         </div>
-    );
+    </div>
+    )
 }
 
-export default Konto;
+export default Info
