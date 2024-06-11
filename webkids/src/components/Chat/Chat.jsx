@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ChatHeader from './ChatHeader';
+import ChatMessages from './ChatMessages';
+import MessageInput from './MessageInput';
 import chat from './chat.module.css'
 
 const Chat = () => {
     const [messages, setMessages] = useState([]);
-    const [username, setUsername] = useState('');
-    const [message, setMessage] = useState('');
+    const user = {
+        name: 'Profil',
+        avatar: 'https://via.placeholder.com/40',
+        status: ''
+    };
 
     useEffect(() => {
         fetchMessages();
@@ -20,12 +26,10 @@ const Chat = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSendMessage = async (message) => {
         try {
-            const newMessage = { username, message };
+            const newMessage = { username: 'Your Username', message };
             await axios.post('http://localhost:5000/api/chat/messages', newMessage);
-            setMessage('');
             fetchMessages();
         } catch (error) {
             console.error('ERROR', error);
@@ -33,34 +37,13 @@ const Chat = () => {
     };
 
     return (
-        <div className={chat.main} >
-            <h1>Chat</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Username"
-                    required
-                />
-                <input
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Message"
-                    required
-                />
-                <button type="submit">Send</button>
-            </form>
-            <div>
-                {messages.map((msg) => (
-                    <div key={msg._id}>
-                        <strong>{msg.username}:</strong> {msg.message}
-                    </div>
-                ))}
-            </div>
+        <div  className={chat.main} >
+            <ChatHeader user={user} />
+            <ChatMessages messages={messages} />
+            <MessageInput onSendMessage={handleSendMessage} />
         </div>
     );
-}
+};
+
 
 export default Chat;
