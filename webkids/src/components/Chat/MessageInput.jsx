@@ -20,7 +20,7 @@ const MessageInput = ({ onSendMessage }) => {
                 placeholder=""
                 style={styles.input}
             />
-            <button type="submit" style={styles.button}>Отправить</button>
+            <button type="submit" style={styles.button}>Send</button>
         </form>
     );
 };
