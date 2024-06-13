@@ -11,6 +11,8 @@ import Help from "./components/Pages/Help";
 import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import CookieConsent from "./components/CookieConsent/CookieConsent";
 import styles from "./App.module.css";
+import Homepage from "./components/Homepage/Homepage";
+import Chat from "./components/Chat/Chat";
 import { Newsletter } from "./components/Newsletter/Newsletter";
 import Konto from "./components/Konto/Konto";
 import Beiträge from "./components/ProfilePages/Beiträge/Beiträge";
@@ -24,25 +26,26 @@ function App() {
   return (
     <Router>
       <div className={styles.App} id="root">
-      {/* <Navbar/> */}
+        <Navbar />
         <div className={styles.content}>
           <Routes>
-          <Route path="/navbar" element={<Navbar />} />
+            <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/messages" element={<Chat />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/cookie-settings" element={<CookieSettings />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/help" element={<Help />} />
             <Route path="/datenschutzerklaerung" element={<PrivacyPolicy />} />
             <Route path="/konto" element={<Konto />} />
-            <Route path="/newsletter" element={<Newsletter/>}/>
-            <Route path="/beiträge" element={<Beiträge/>}/>
-            <Route path="/info" element={<Info/>}/>
-            <Route path="/freunde" element={<Freunde/>}/>
-            <Route path="/fotos" element={<Fotos/>}/>
-            <Route path="/videos" element={<Videos/>}/>
-            <Route path="/besuche" element={<Besuche/>}/>
+            <Route path="/newsletter" element={<Newsletter />} />
+            <Route path="/beiträge" element={<Beiträge />} />
+            <Route path="/info" element={<Info />} />
+            <Route path="/freunde" element={<Freunde />} />
+            <Route path="/fotos" element={<Fotos />} />
+            <Route path="/videos" element={<Videos />} />
+            <Route path="/besuche" element={<Besuche />} />
           </Routes>
         </div>
         <Footer />
@@ -53,4 +56,3 @@ function App() {
 }
 
 export default App;
-

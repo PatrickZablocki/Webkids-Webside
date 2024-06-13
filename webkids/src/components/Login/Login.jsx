@@ -15,20 +15,20 @@ function Login() {
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
-            // Hier Senden wir eine POST-Anfrage an den Server zur Anmeldung
-            const response = await fetch('/login', {
+            const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email, password }),
             });
-                //  Wenn anmeldung erfolgreich war wird es wieder zur Navbar weitergeleitet
+            
             const data = await response.json();
             if (response.ok) {
                 console.log('Login successful');
                 localStorage.setItem('token', data.token);
-                navigate('/navbar');// Navigiert nach erfolgreicher Anmeldung zur Navbar
+                fetchUserInfo(); // Benutzerdaten sofort abrufen nach erfolgreichem Login
+                navigate('/navbar'); // Navigiert nach erfolgreicher Anmeldung zur Navbar
             } else {
                 setError(data.message);
                 console.error('Login failed:', data.message);
@@ -39,16 +39,39 @@ function Login() {
         }
     };
 
+    const fetchUserInfo = async () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const response = await fetch('http://localhost:5000/user', {  // Update: Hier die korrekte URL des User-Endpunkts angeben
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                if (response.ok) {
+                    const userData = await response.json();
+                    console.log('User data:', userData);
+                } else {
+                    console.error('Failed to fetch user info:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+            }
+        }
+    };
+
     const handleLoginWithGoogle = () => {
-        console.log('Anmeldung mit Google');
+        console.log('Login with Google');
     };
 
     const handleLoginWithApple = () => {
-        console.log('Anmeldung mit Apple');
+        console.log('Login with Apple');
     };
+
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
+
     return (
         <div className={styles.Login_container}>
             <Link to="/navbar" className={styles.logoLink}>

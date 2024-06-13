@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { faHome, faUserFriends, faEnvelope, faBell, faBars } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from './Navbar.module.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Newsletter } from './Newsletter/Newsletter';
 
 const Navbar = () => {
@@ -11,9 +11,20 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    navigate('/login');
   };
 
   const closeNewsletter = () => {
@@ -21,40 +32,38 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    setShowNewsletter(true);
-    fetchUserInfo();
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetchUserInfo(); // Implement function to fetch user data
+    }
   }, []);
 
   const fetchUserInfo = async () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const response = await fetch('http://localhost:5000/user', {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data);
-        } else {
-          console.error('Failed to fetch user info:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error fetching user info:', error);
+    try {
+      const response = await fetch('/user', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+      } else {
+        throw new Error('Failed to fetch user information');
       }
+    } catch (error) {
+      console.error('Error fetching user info:', error);
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setUser(null);
-    navigate('/navbar');
-  };
+  // Check if current location is "/login" or "/register"
+  const isLoginPage = location.pathname === '/login';
+  const isRegisterPage = location.pathname === '/register';
 
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
+  // Render navbar only if not on login or register page
+  if (isLoginPage || isRegisterPage) {
+    return null;
+  }
 
   return (
     <div>
@@ -69,7 +78,7 @@ const Navbar = () => {
         <div className={`${styles.nav_icons} ${showMenu ? styles.show : ""}`}>
           <span className={styles.icon}>
             <FontAwesomeIcon icon={faHome} />
-            <Link to="/navbar">Start</Link>
+            <Link to="/">Start</Link>
           </span>
           <span className={styles.icon}>
             <FontAwesomeIcon icon={faUserFriends} />
@@ -77,11 +86,11 @@ const Navbar = () => {
           </span>
           <span className={styles.icon}>
             <FontAwesomeIcon icon={faEnvelope} />
-            <Link to="/navbar">Nachrichten</Link>
+            <Link to="/messages">Nachrichten</Link>
           </span>
           <span className={styles.icon}>
             <FontAwesomeIcon icon={faBell} />
-            <Link to="/navbar">Mitteilungen</Link>
+            <Link to="/notifications">Mitteilungen</Link>
           </span>
           {user ? (
             <div className={styles.dropdown_container}>
@@ -90,8 +99,8 @@ const Navbar = () => {
               </span>
               {showDropdown && (
                 <div className={styles.dropdown_menu}>
-                  <Link to="/konto" className={styles.dropdown_link}>Konto</Link>
-                  <Link to="/datenschutzerklaerung" className={styles.dropdown_link}>Einstellungen & Datenschutz</Link>
+                  <Link to="/account" className={styles.dropdown_link}>Konto</Link>
+                  <Link to="/privacy" className={styles.dropdown_link}>Einstellungen & Datenschutz</Link>
                   <Link to="/help" className={styles.dropdown_link}>Hilfe</Link>
                   <button onClick={handleLogout}>Logout</button>
                 </div>
@@ -103,7 +112,7 @@ const Navbar = () => {
                 <Link to="/login">Login</Link>
               </li>
               <li>
-                <Link to="/register">Register</Link>
+                <Link to="/register">Registrieren</Link>
               </li>
             </span>
           )}

@@ -1,9 +1,11 @@
-// Der Code Funktioniert mit der Anmeldung
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const fs = require('fs');
 const User = require('./models/user');
 const Subscriber = require('./models/subscriber');
 
@@ -25,6 +27,12 @@ mongoose.connect(mongoURL, {
 mongoose.connection.on('error', (err) => {
     console.error('MongoDB connection error:', err);
 });
+
+const uploadDir = 'uploads';
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
+app.use('/uploads', express.static(path.join(__dirname, uploadDir)));
 
 // Registrierung
 app.post('/register', async (req, res) => {
@@ -138,6 +146,15 @@ app.get('/user', async (req, res) => {
         res.status(500).json({ message: 'Interner Serverfehler' });
     }
 });
+
+// API-Routen für Posts, Authentifizierung und Chat
+const postRoutes = require('./routes/post');
+const authRoutes = require('./routes/auth');
+const chatRoutes = require('./routes/chat'); 
+
+app.use('/api/posts', postRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/chat', chatRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server läuft auf Port ${PORT}`));
