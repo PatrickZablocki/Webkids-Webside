@@ -16,6 +16,7 @@ function App() {
   return (
     <Router>
       <div className={styles.App} id="root">
+        <Navbar />
         <div className={styles.content}>
           <Routes>
             <Route path="/" element={<div>Home Inhalt</div>} />
