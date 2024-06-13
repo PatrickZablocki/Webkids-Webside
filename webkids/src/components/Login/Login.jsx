@@ -43,7 +43,7 @@ function Login() {
         const token = localStorage.getItem('token');
         if (token) {
             try {
-                const response = await fetch('http://localhost:5000/user', {  // Update: Hier die korrekte URL des User-Endpunkts angeben
+                const response = await fetch('http://localhost:5000/user', { 
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
