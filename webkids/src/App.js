@@ -11,15 +11,14 @@ import Help from "./components/Pages/Help";
 import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import CookieConsent from "./components/CookieConsent/CookieConsent";
 import styles from "./App.module.css";
-import Homepage from './components/Homepage/Homepage'
+import Homepage from "./components/Homepage/Homepage";
 import Chat from "./components/Chat/Chat";
-
 
 function App() {
   return (
     <Router>
       <div className={styles.App} id="root">
-        <Navbar />  {/* Navbar hier außerhalb von Routes  */}
+        <Navbar /> {/* Navbar hier außerhalb von Routes  */}
         <div className={styles.content}>
           <Routes>
             <Route path="/" element={<Homepage />} />

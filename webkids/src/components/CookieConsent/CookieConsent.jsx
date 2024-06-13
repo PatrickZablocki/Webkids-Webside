@@ -38,10 +38,10 @@ const CookieConsent = () => {
         <div className={styles.content}>
           <h2>Cookie-Hinweis</h2>
           <p>
-            Diese Website verwendet Cookies, um sicherzustellen, dass Sie die
-            beste Erfahrung auf unserer Website erhalten. Durch die weitere
-            Nutzung unserer Website stimmen Sie der Verwendung von Cookies zu.
-            Weitere Informationen finden Sie in unserer{" "}
+            Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf
+            unserer Website zu bieten. Durch die weitere Nutzung dieser Website
+            stimmen Sie der Verwendung von Cookies zu. Weitere Informationen
+            finden Sie in unserer{" "}
             <a href="/datenschutzerklaerung">Datenschutzerklärung</a>.
           </p>
           <div className={styles.actions}>
