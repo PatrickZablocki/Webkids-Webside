@@ -24,7 +24,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setUser(null);
-    navigate('/login');
+    navigate('/navbar');
   };
 
   const closeNewsletter = () => {
@@ -34,7 +34,7 @@ const Navbar = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      fetchUserInfo(); // Implement function to fetch user data
+      fetchUserInfo();
     }
   }, []);
 
@@ -56,12 +56,16 @@ const Navbar = () => {
     }
   };
 
-  // Check if current location is "/login" or "/register"
-  const isLoginPage = location.pathname === '/login';
-  const isRegisterPage = location.pathname === '/register';
+  
+  const routesWithoutNavbar =
+  ['/login','/register','/konto','/beiträge','/info',
+  '/freunde','/fotos','/videos','/besuche','/help','/datenschutzerklaerung',
+  '/cookies',
+  ];
+  const isRouteWithoutNavbar = routesWithoutNavbar.includes(location.pathname);
 
-  // Render navbar only if not on login or register page
-  if (isLoginPage || isRegisterPage) {
+  
+  if (isRouteWithoutNavbar) {
     return null;
   }
 
@@ -99,8 +103,8 @@ const Navbar = () => {
               </span>
               {showDropdown && (
                 <div className={styles.dropdown_menu}>
-                  <Link to="/account" className={styles.dropdown_link}>Konto</Link>
-                  <Link to="/privacy" className={styles.dropdown_link}>Einstellungen & Datenschutz</Link>
+                  <Link to="/konto" className={styles.dropdown_link}>Konto</Link>
+                  <Link to="/datenschutzerklaerung" className={styles.dropdown_link}>Einstellungen & Datenschutz</Link>
                   <Link to="/help" className={styles.dropdown_link}>Hilfe</Link>
                   <button onClick={handleLogout}>Logout</button>
                 </div>
