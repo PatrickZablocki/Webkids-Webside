@@ -1,3 +1,4 @@
+
 const ChatHeader = ({ user }) => {
     return (
         <div style={styles.header}>

@@ -17,10 +17,10 @@ const MessageInput = ({ onSendMessage }) => {
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder=""
+                placeholder="Сообщение"
                 style={styles.input}
             />
-            <button type="submit" style={styles.button}>Send</button>
+            <button type="submit" style={styles.button}>Отправить</button>
         </form>
     );
 };

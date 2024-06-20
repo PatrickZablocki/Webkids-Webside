@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     birthdate: { type: Date, required: true },
     password: { type: String, required: true },
     profilePicture: { type: String },
-    newsletterDeclined: { type: Boolean, default: false }
+    newsletterDeclined: { type: Boolean, default: false },
+    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }]
 });
 
 const User = mongoose.model('User', userSchema);

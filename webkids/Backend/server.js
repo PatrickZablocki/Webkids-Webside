@@ -15,14 +15,13 @@ app.use(cors());
 
 const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/mydatabase';
 mongoose.set('debug', true);  // Mongoose Debugging aktivieren
-mongoose.connect(mongoURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
+mongoose.connect(mongoURL)
+  .then(() => {
     console.log('Connected to MongoDB');
-}).catch((error) => {
+  })
+  .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
-});
+  });
 
 mongoose.connection.on('error', (err) => {
     console.error('MongoDB connection error:', err);
@@ -32,6 +31,7 @@ const uploadDir = 'uploads';
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
+
 app.use('/uploads', express.static(path.join(__dirname, uploadDir)));
 
 // Registrierung
@@ -150,11 +150,11 @@ app.get('/user', async (req, res) => {
 // API-Routen für Posts, Authentifizierung und Chat
 const postRoutes = require('./routes/post');
 const authRoutes = require('./routes/auth');
-const chatRoutes = require('./routes/chat'); 
+const chatRoutes = require('./routes/chat');
 
 app.use('/api/posts', postRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server läuft auf Port ${PORT}`));
+const port = process.env.PORT || 5000;
+app.listen(port, () => {console.log(`Server läuft auf Port ${port}`);});
