@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Pages.module.css";
 
 const Help = () => {
   return (
     <div className={styles.page}>
+      <Link to="/navbar" className={styles.logoLink}>
+      <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
+      </Link>
       <h1>Hilfe</h1>
       <p>
         Willkommen im Hilfe-Bereich von Webkids. Hier finden Sie Antworten auf

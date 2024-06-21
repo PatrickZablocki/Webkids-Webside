@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Pages.module.css";
 
 const Cookies = () => {
   return (
     <div className={styles.page}>
+      <Link to="/navbar" className={styles.logoLink}>
+      <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
+      </Link>
       <h1>Cookie-Richtlinie</h1>
       <p>
         Diese Cookie-Richtlinie erklärt, was Cookies sind und wie wir sie

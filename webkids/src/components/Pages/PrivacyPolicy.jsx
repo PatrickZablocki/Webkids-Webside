@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Pages.module.css";
 
 const PrivacyPolicy = () => {
   return (
     <div className={styles.page}>
+      <Link to="/navbar" className={styles.logoLink}>
+      <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
+      </Link>
       <h1>Datenschutzerklärung</h1>
       <p>
         Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Wir
