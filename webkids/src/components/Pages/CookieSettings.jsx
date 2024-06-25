@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Pages.module.css";
 
 const CookieSettings = () => {
   return (
     <div className={styles.page}>
+      <Link to="/navbar" className={styles.logoLink}>
+      <img src="/Logo/Logo_Webkids1.webp" alt="Logo" className={styles.logo} />
+      </Link>
       <h1>Cookie-Einstellungen</h1>
       <p>
         Auf dieser Seite können Sie Ihre Präferenzen für die Verwendung von
