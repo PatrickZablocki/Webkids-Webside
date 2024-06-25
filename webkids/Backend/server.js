@@ -55,7 +55,7 @@ const fileFilter = (req, file, cb) => {
 };
 
 const upload = multer({ storage: storage, fileFilter: fileFilter });
-
+// Das hochladen einer Datei
 app.post('/upload-file', upload.single('file'), async (req, res) => {
     try {
         const filePath = req.file.path;
@@ -72,7 +72,7 @@ app.post('/upload-file', upload.single('file'), async (req, res) => {
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
-
+// Zum Löschen der Daten die man hochlädt
 app.delete('/delete-file/:filename', (req, res) => {
     try {
         const { filename } = req.params;
@@ -90,7 +90,7 @@ app.delete('/delete-file/:filename', (req, res) => {
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
-
+//  Die Register Route
 app.post('/register', async (req, res) => {
     try {
         const { email, firstName, lastName, birthdate, password } = req.body;
@@ -122,7 +122,7 @@ app.post('/register', async (req, res) => {
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
-
+// Die Login Route
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -184,7 +184,7 @@ app.post('/decline-newsletter', async (req, res) => {
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
-
+// ABrufen der user daten
 app.get('/user', async (req, res) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
@@ -199,7 +199,7 @@ app.get('/user', async (req, res) => {
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
-
+// Wieviele Besucher auf deinem Profil waren
 app.post('/profile-visit', async (req, res) => {
     try {
         const { userId } = req.body;
@@ -217,7 +217,7 @@ app.post('/profile-visit', async (req, res) => {
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
-
+// Un der zÄHLER
 app.get('/profile-visits/:userId', async (req, res) => {
     try {
         const { userId } = req.params;
