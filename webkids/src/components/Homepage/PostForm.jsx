@@ -66,7 +66,8 @@ function PostForm({ onNewPost }) {
         onChange={(e) => setText(e.target.value)}
         required
       />
-      <div className={postform.fileInputWrapper} >
+     <div className={postform.button}>
+     <div className={postform.fileInputWrapper} >
         <input
           className={postform.fileInput}
           type="file"
@@ -82,6 +83,7 @@ function PostForm({ onNewPost }) {
       )}
       <button className={postform.button} type="submit">Post</button>
       {error && <p className={postform.errorMessage} >{error}</p>}
+     </div>
     </form>
   );
 }

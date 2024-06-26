@@ -5,16 +5,22 @@
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
   margin-bottom: 1rem;
 }
 
 .textarea {
   resize: none;
-  height: 100px;
+  height: 25px;
   padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
+}
+
+.button{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .fileInputWrapper {
@@ -36,6 +42,11 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.customFileButton:hover {
+  background-color: white;
+  color: black;
 }
 
 /* .customFileButton:hover {
@@ -72,8 +83,8 @@
 }
 
 .button {
-  padding: 0.5rem 1rem;
-  background-color: #333;
+  /* padding: 0.5rem 1rem; */
+  /* background-color: #333; */
   color: white;
   border: none;
   border-radius: 5px;
