@@ -38,7 +38,7 @@ export const Newsletter = () => {
         }
     };
 
-    const declineNewsletter = async () => {
+    const declineNewsletter = async (email) => {
         try {
             const response = await fetch('http://localhost:5000/decline-newsletter', {
                 method: 'POST',
@@ -53,6 +53,7 @@ export const Newsletter = () => {
             }
 
             setShow(false);
+            localStorage.setItem('newsletterDismissed', 'true'); // Speichern Sie den Status im lokalen Speicher
         } catch (error) {
             console.error('Fehler:', error);
             setError('Es gab ein Problem beim Ablehnen. Bitte versuche es später erneut.');
@@ -66,7 +67,7 @@ export const Newsletter = () => {
     };
 
     const handleClose = async () => {
-        await declineNewsletter();
+        await declineNewsletter(email); // Übergabe der E-Mail-Adresse des Benutzers
     };
 
     if (!show) {

@@ -159,7 +159,7 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
-
+// Route für den Newsletter
 app.post('/decline-newsletter', async (req, res) => {
     try {
         const { email } = req.body;
@@ -173,18 +173,16 @@ app.post('/decline-newsletter', async (req, res) => {
             return res.status(400).json({ message: 'Benutzer nicht gefunden' });
         }
 
-        const newSubscriber = new Subscriber({ email });
-        await newSubscriber.save();
         existingUser.newsletterDeclined = true;
         await existingUser.save();
 
-        res.status(201).json({ message: 'Erfolgreich abonniert' });
+        res.status(200).json({ message: 'Newsletter abgelehnt' });
     } catch (error) {
-        console.error('Fehler beim Abonnement:', error.stack);
+        console.error('Fehler beim Ablehnen des Newsletters:', error.stack);
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
-// ABrufen der user daten
+// Abrufen der user daten
 app.get('/user', async (req, res) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
@@ -217,7 +215,7 @@ app.post('/profile-visit', async (req, res) => {
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
-// Un der zÄHLER
+// Un der Zähler
 app.get('/profile-visits/:userId', async (req, res) => {
     try {
         const { userId } = req.params;
