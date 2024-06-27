@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const http = require('http');
+const socketIo = require('socket.io');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
@@ -10,6 +12,14 @@ const User = require('./models/user');
 const Subscriber = require('./models/subscriber');
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server, {
+    cors: {
+        origin: 'http://localhost:5000', 
+        methods: ['GET', 'POST'],
+    },
+});
+
 app.use(express.json());
 app.use(cors());
 
@@ -27,12 +37,40 @@ mongoose.connection.on('error', (err) => {
     console.error('MongoDB connection error:', err);
 });
 
+
+// mongoose.connect('mongodb://localhost:27017/chat', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// });
+
+// const messageSchema = new mongoose.Schema({
+//     user: String,
+//     message: String,
+//     timestamp: { type: Date, default: Date.now },
+// });
+
+// const Message = mongoose.model('Message', messageSchema);
+
 const uploadDir = 'uploads';
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
 
 app.use('/uploads', express.static(path.join(__dirname, uploadDir)));
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    
+    socket.on('sendMessage', async (data) => {
+        const message = new Message(data);
+        await message.save();
+        io.emit('receiveMessage', data);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+});
 
 // Registrierung
 app.post('/register', async (req, res) => {
@@ -147,14 +185,17 @@ app.get('/user', async (req, res) => {
     }
 });
 
+
 // API-Routen für Posts, Authentifizierung und Chat
 const postRoutes = require('./routes/post');
 const authRoutes = require('./routes/auth');
 const chatRoutes = require('./routes/chat');
 
+
 app.use('/api/posts', postRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {console.log(`Server läuft auf Port ${port}`);});
