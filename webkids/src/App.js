@@ -29,6 +29,7 @@ function App() {
         <Navbar />
         <div className={styles.content}>
           <Routes>
+          <Route path="/navbar" element={<Navbar />} />
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

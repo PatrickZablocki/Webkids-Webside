@@ -56,15 +56,29 @@ const Navbar = () => {
     }
   };
 
-  
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        fetchUserInfo();
+      } else {
+        setUser(null);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
   const routesWithoutNavbar =
-  ['/login','/register','/konto','/info',
-  '/freunde','/fotos','/videos','/besuche','/help','/datenschutzerklaerung',
-  '/cookies','/cookie-settings','/impressum','/beiträge',
-  ];
+    ['/login', '/register', '/konto', '/info',
+      '/freunde', '/fotos', '/videos', '/besuche', '/help', '/datenschutzerklaerung',
+      '/cookies', '/cookie-settings', '/impressum', '/beiträge',
+    ];
   const isRouteWithoutNavbar = routesWithoutNavbar.includes(location.pathname);
 
-  
   if (isRouteWithoutNavbar) {
     return null;
   }
