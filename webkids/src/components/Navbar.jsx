@@ -72,6 +72,7 @@ const Navbar = () => {
     };
   }, []);
 
+  // Hier stelle ich ein das die Navbar in den folgenden Components nicht angezeigt wird
   const routesWithoutNavbar =
     ['/login', '/register', '/konto', '/info',
       '/freunde', '/fotos', '/videos', '/besuche', '/help', '/datenschutzerklaerung',
