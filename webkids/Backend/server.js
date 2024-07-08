@@ -62,11 +62,14 @@ app.post('/upload-file', upload.single('file'), async (req, res) => {
 
         if (req.file.mimetype.startsWith('image')) {
             await sharp(filePath)
-                .resize({ width: 800, height: 600 })
+                .resize({ width: 150, height: 150 })
                 .toFile(filePath);
-        }
 
-        res.status(201).json({ message: 'Datei erfolgreich hochgeladen', path: req.file.filename });
+            fs.unlinkSync(filePath);
+            res.status(201).json({ message: 'Datei erfolgreich hochgeladen', path: req.file.filename });
+        } else {
+            res.status(400).json({message: 'Ungeltiges Dateiformat'});
+        }
     } catch (error) {
         console.error('Fehler beim Hochladen der Datei:', error.stack);
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
@@ -168,17 +171,19 @@ app.post('/decline-newsletter', async (req, res) => {
             return res.status(400).json({ message: 'Email ist erforderlich' });
         }
 
+        // Finde den Benutzer anhand der E-Mail
         const existingUser = await User.findOne({ email });
         if (!existingUser) {
             return res.status(400).json({ message: 'Benutzer nicht gefunden' });
         }
 
+        // Aktualisiere das newsletterDeclined Feld auf true
         existingUser.newsletterDeclined = true;
         await existingUser.save();
 
-        res.status(200).json({ message: 'Newsletter abgelehnt' });
+        res.status(200).json({ message: 'Newsletter erfolgreich abgelehnt' });
     } catch (error) {
-        console.error('Fehler beim Ablehnen des Newsletters:', error.stack);
+        console.error('Fehler beim Ablehnen des Newsletters:', error);
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });
@@ -194,6 +199,32 @@ app.get('/user', async (req, res) => {
         res.status(200).json(user);
     } catch (error) {
         console.error('Fehler beim Abrufen des Benutzers:', error.stack);
+        res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
+    }
+});
+app.put('/user', async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret');
+        const { firstName, lastName, email, birthdate, profilePicture } = req.body;
+
+        const user = await User.findById(decoded.userId);
+        if (!user) {
+            return res.status(404).json({ message: 'Benutzer nicht gefunden' });
+        }
+
+        // Aktualisieren der Benutzerdaten
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.email = email;
+        user.birthdate = birthdate;
+        user.profilePicture = profilePicture;
+
+        await user.save();
+
+        res.status(200).json({ message: 'Benutzerdaten erfolgreich aktualisiert' });
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren der Benutzerdaten:', error.stack);
         res.status(500).json({ message: 'Interner Serverfehler', error: error.message });
     }
 });

@@ -139,7 +139,20 @@
 .dropdown_menu button:hover {
   background-color: darkred;
 }
+/*  Die Einstellung für das Profilbild */
+.profile_picture_container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
 
+.profile_picture {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
 /* Hier beginnen die Media Queries für die mobile Ansicht */
 @media only screen and (max-width: 768px) {
   .menu_icon {
