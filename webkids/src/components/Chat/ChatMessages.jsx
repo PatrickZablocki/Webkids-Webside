@@ -1,4 +1,6 @@
 
+// import React from 'react';
+
 // const ChatMessages = ({ messages }) => {
 //     return (
 //         <div style={styles.messages}>

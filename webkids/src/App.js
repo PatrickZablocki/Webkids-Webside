@@ -12,7 +12,7 @@ import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import CookieConsent from "./components/CookieConsent/CookieConsent";
 import styles from "./App.module.css";
 import Homepage from "./components/Homepage/Homepage";
-import Chat from "./components/Chat/Chat";
+// import Chat from "./components/Chat/Chat";
 import { Newsletter } from "./components/Newsletter/Newsletter";
 import Konto from "./components/Konto/Konto";
 import Beiträge from "./components/ProfilePages/Beiträge/Beiträge";
@@ -21,6 +21,7 @@ import Freunde from "./components/ProfilePages/freunde/freunde";
 import Fotos from "./components/ProfilePages/fotos/fotos";
 import Videos from "./components/ProfilePages/videosPage/Videos";
 import Besuche from "./components/ProfilePages/besuche/besuche";
+import Chatpage from "./components/Chat/Pages/Chatpage";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/messages" element={<Chat />} />
+            <Route path="/messages" element={<Chatpage />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/cookie-settings" element={<CookieSettings />} />
             <Route path="/impressum" element={<Impressum />} />

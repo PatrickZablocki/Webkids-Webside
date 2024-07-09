@@ -1,3 +1,4 @@
+
 // import React, { useState } from 'react';
 
 // const MessageInput = ({ onSendMessage }) => {
@@ -17,10 +18,10 @@
 //                 type="text"
 //                 value={message}
 //                 onChange={(e) => setMessage(e.target.value)}
-//                 placeholder="Сообщение"
+//                 placeholder="Message"
 //                 style={styles.input}
 //             />
-//             <button type="submit" style={styles.button}>Отправить</button>
+//             <button type="submit" style={styles.button}>Send</button>
 //         </form>
 //     );
 // };

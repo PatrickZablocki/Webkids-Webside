@@ -1,66 +1,29 @@
+// // server/routes/chat.js
 // const express = require('express');
 // const router = express.Router();
-// const Message = require('../models/message');
-// const User = require('../models/user');
+// const Message = require('../models/message'); // Убедитесь, что путь правильный
 
-
-// router.get('/users', async (req, res) => {
+// // Get all messages
+// router.get('/', async (req, res) => {
 //     try {
-//         const currentUserId = req.query.currentUserId; 
-//         const users = await User.find({ _id: { $ne: currentUserId } }); 
-//         res.json(users);
-//     } catch (error) {
-//         res.status(500).json({ message: 'Error fetching users', error: error.message });
-//     }
-// });
-
-// router.get('/messages/:senderId/:receiverId', async (req, res) => {
-//     const { senderId, receiverId } = req.params;
-//     try {
-//         const messages = await Message.find({
-//             $or: [
-//                 { sender: senderId, receiver: receiverId },
-//                 { sender: receiverId, receiver: senderId },
-//             ],
-//         }).sort({ timestamp: -1 });
-
+//         const messages = await Message.find().sort({ timestamp: 1 });
 //         res.json(messages);
-//     } catch (error) {
-//         res.status(500).json({ message: 'Error fetching messages', error: error.message });
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
 //     }
 // });
 
-// router.post('/messages', async (req, res) => {
-//     const { senderId, receiverId, content } = req.body;
-
-//     const newMessage = new Message({
-//         sender: senderId,
-//         receiver: receiverId,
-//         content,
-//     });
+// // Save a new message
+// router.post('/', async (req, res) => {
+//     const { user, message } = req.body;
+//     const newMessage = new Message({ user, message });
 
 //     try {
 //         const savedMessage = await newMessage.save();
-//         res.json(savedMessage);
-//     } catch (error) {
-//         res.status(500).json({ message: 'Error saving message', error: error.message });
+//         res.status(201).json(savedMessage);
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
 //     }
 // });
 
 // module.exports = router;
-
-const express = require('express');
-const Message = require('../models/message');
-const router = express.Router();
-
-router.get('/messages', async (req, res) => {
-    try {
-        const messages = await Message.find();
-        res.json(messages);
-    } catch (error) {
-        console.error('Error receiving a message:', error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
-
-module.exports = router;

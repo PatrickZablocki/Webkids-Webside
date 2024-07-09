@@ -1,47 +1,116 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const http = require('http');
-const socketIo = require('socket.io');
-const bcrypt = require('bcrypt');
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const path = require('path');
-const fs = require('fs');
-const User = require('./models/user');
-const Subscriber = require('./models/subscriber');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const http = require("http");
+const bcrypt = require("bcrypt");
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const path = require("path");
+const fs = require("fs");
+const Subscriber = require("./models/subscriber");
+const userRoutes = require("./routes/userRoutes");
+const chatRoutes = require("./routes/chatRoutes");
+const messageRoutes = require("./routes/messageRoutes");
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const connectDB = require("./config/db");
 
+connectDB();
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server, {
-    cors: {
-        origin: 'http://localhost:5000', 
-        methods: ['GET', 'POST'],
-    },
-});
+// const server = http.createServer(app);
+// const io = new Server(server);
 
+const server = http.createServer(app);
 app.use(express.json());
 app.use(cors());
 
-const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/mydatabase';
-mongoose.set('debug', true);  // Mongoose Debugging aktivieren
-mongoose.connect(mongoURL)
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-  });
+app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
 
-mongoose.connection.on('error', (err) => {
-    console.error('MongoDB connection error:', err);
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+
+// --------------------------deployment------------------------------
+
+// Error Handling middlewares
+app.use(notFound);
+app.use(errorHandler);
+
+// const PORT = process.env.PORT;
+
+// const server = app.listen(
+//   PORT,
+//   console.log(`Server running on PORT ${PORT}...`.yellow.bold)
+// );
+
+const io = require("socket.io")(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: "http://localhost:3000",
+    // credentials: true,
+  },
 });
 
+io.on("connection", (socket) => {
+  console.log("Connected to socket.io");
+  socket.on("setup", (userData) => {
+    socket.join(userData._id);
+    socket.emit("connected");
+  });
 
-// mongoose.connect('mongodb://localhost:27017/chat', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// });
+  socket.on("join chat", (room) => {
+    socket.join(room);
+    console.log("User Joined Room: " + room);
+  });
+  socket.on("typing", (room) => socket.in(room).emit("typing"));
+  socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
+
+  socket.on("new message", (newMessageRecieved) => {
+    var chat = newMessageRecieved.chat;
+
+    if (!chat.users) return console.log("chat.users not defined");
+
+    chat.users.forEach((user) => {
+      if (user._id == newMessageRecieved.sender._id) return;
+
+      socket.in(user._id).emit("message recieved", newMessageRecieved);
+    });
+  });
+
+  socket.off("setup", () => {
+    console.log("USER DISCONNECTED");
+    socket.leave(userData._id);
+  });
+});
+
+const mongoURL = process.env.MONGO_URL || "mongodb://localhost:27017/chat";
+mongoose.set("debug", true); // Mongoose Debugging aktivieren
+mongoose
+  .connect(mongoURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
+
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB connection error:", err);
+});
 
 // const messageSchema = new mongoose.Schema({
 //     user: String,
@@ -51,151 +120,170 @@ mongoose.connection.on('error', (err) => {
 
 // const Message = mongoose.model('Message', messageSchema);
 
-const uploadDir = 'uploads';
+const jwtSecret = process.env.JWT_SECRET;
+const bcryptSalt = bcrypt.genSaltSync(10);
+
+const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
+  fs.mkdirSync(uploadDir);
 }
 
-app.use('/uploads', express.static(path.join(__dirname, uploadDir)));
+app.use("/uploads", express.static(path.join(__dirname, uploadDir)));
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
-    
-    socket.on('sendMessage', async (data) => {
-        const message = new Message(data);
-        await message.save();
-        io.emit('receiveMessage', data);
-    });
+// io.on('connection', (socket) => {
+//     console.log('New WebSocket connection');
 
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-});
+//     // Send all previous messages to the new client
+//     Message.find().sort({ timestamp: 1 }).then(messages => {
+//         socket.emit('previousMessages', messages);
+//     });
+
+//     // Receive new message
+//     socket.on('message', async (message) => {
+//         const newMessage = new Message(message);
+//         await newMessage.save();
+//         io.emit('message', newMessage);
+//     });
+
+//     socket.on('disconnect', () => {
+//         console.log('WebSocket disconnected');
+//     });
+// });
 
 // Registrierung
-app.post('/register', async (req, res) => {
-    try {
-        const { email, firstName, lastName, birthdate, password } = req.body;
+app.post("/register", async (req, res) => {
+  try {
+    const { email, firstName, lastName, birthdate, password } = req.body;
 
-        if (!email || !firstName || !lastName || !birthdate || !password) {
-            return res.status(400).json({ message: 'Alle Felder sind erforderlich' });
-        }
-
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'Benutzer existiert bereits' });
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newUser = new User({
-            email,
-            firstName,
-            lastName,
-            birthdate,
-            password: hashedPassword,
-        });
-
-        await newUser.save();
-
-        res.status(201).json({ message: 'Benutzer erfolgreich registriert' });
-    } catch (error) {
-        console.error('Fehler bei der Registrierung:', error);
-        res.status(500).json({ message: 'Interner Serverfehler', error: error.message }); 
+    if (!email || !firstName || !lastName || !birthdate || !password) {
+      return res.status(400).json({ message: "Alle Felder sind erforderlich" });
     }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Benutzer existiert bereits" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      email,
+      firstName,
+      lastName,
+      birthdate,
+      password: hashedPassword,
+    });
+
+    await newUser.save();
+
+    res.status(201).json({ message: "Benutzer erfolgreich registriert" });
+  } catch (error) {
+    console.error("Fehler bei der Registrierung:", error);
+    res
+      .status(500)
+      .json({ message: "Interner Serverfehler", error: error.message });
+  }
 });
 
 // Login
-app.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-        if (!email || !password) {
-            return res.status(400).json({ message: 'Email und Passwort sind erforderlich' });
-        }
-
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: 'Benutzer nicht gefunden' });
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(400).json({ message: 'Ungültiges Passwort' });
-        }
-
-        const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
-
-        const existingSubscriber = await Subscriber.findOne({ email });
-        let showNewsletterPopup = false;
-        if (!existingSubscriber) {
-            showNewsletterPopup = true;
-        }
-
-        res.status(200).json({ 
-            message: 'Login erfolgreich', 
-            token, 
-            showNewsletterPopup 
-        });
-    } catch (error) {
-        console.error('Fehler beim Login:', error);
-        res.status(500).json({ message: 'Interner Serverfehler' });
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email und Passwort sind erforderlich" });
     }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "Benutzer nicht gefunden" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Ungültiges Passwort" });
+    }
+
+    const token = jwt.sign(
+      { userId: user._id },
+      "my_super_secret_key_1234567890",
+      { expiresIn: "1h" }
+    );
+
+    const existingSubscriber = await Subscriber.findOne({ email });
+    let showNewsletterPopup = false;
+    if (!existingSubscriber) {
+      showNewsletterPopup = true;
+    }
+
+    res.status(200).json({
+      message: "Login erfolgreich",
+      token,
+      showNewsletterPopup,
+    });
+  } catch (error) {
+    console.error("Fehler beim Login:", error);
+    res.status(500).json({ message: "Interner Serverfehler" });
+  }
 });
 
 // Newsletter-Abonnement
-app.post('/decline-newsletter', async (req, res) => {
-    try {
-        const { email } = req.body;
+app.post("/decline-newsletter", async (req, res) => {
+  try {
+    const { email } = req.body;
 
-        if (!email) {
-            return res.status(400).json({ message: 'Email ist erforderlich' });
-        }
-
-        const existingUser = await User.findOne({ email });
-        if (!existingUser) {
-            return res.status(400).json({ message: 'Benutzer bereits abonniert' });
-        }
-
-        const newSubscriber = new Subscriber({ email });
-        await newSubscriber.save();
-        existingUser.newsletterDeclined = true;
-        await existingUser.save();
-
-        res.status(201).json({ message: 'Erfolgreich abonniert' });
-    } catch (error) {
-        console.error('Fehler beim Abonnement:', error);
-        res.status(500).json({ message: 'Interner Serverfehler' });
+    if (!email) {
+      return res.status(400).json({ message: "Email ist erforderlich" });
     }
+
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      return res.status(400).json({ message: "Benutzer bereits abonniert" });
+    }
+
+    const newSubscriber = new Subscriber({ email });
+    await newSubscriber.save();
+    existingUser.newsletterDeclined = true;
+    await existingUser.save();
+
+    res.status(201).json({ message: "Erfolgreich abonniert" });
+  } catch (error) {
+    console.error("Fehler beim Abonnement:", error);
+    res.status(500).json({ message: "Interner Serverfehler" });
+  }
 });
 
 // Benutzerinformationen abrufen
-app.get('/user', async (req, res) => {
-    try {
-        const token = req.headers.authorization.split(' ')[1];
-        const decoded = jwt.verify(token, 'your_jwt_secret');
-        const user = await User.findById(decoded.userId).select('-password');
-        if (!user) {
-            return res.status(404).json({ message: 'Benutzer nicht gefunden' });
-        }
-        res.status(200).json(user);
-    } catch (error) {
-        console.error('Fehler beim Abrufen des Benutzers:', error);
-        res.status(500).json({ message: 'Interner Serverfehler' });
+app.get("/user", async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(token, "my_super_secret_key_1234567890");
+    const user = await User.findById(decoded.userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "Benutzer nicht gefunden" });
     }
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Fehler beim Abrufen des Benutzers:", error);
+    res.status(500).json({ message: "Interner Serverfehler" });
+  }
 });
 
-
 // API-Routen für Posts, Authentifizierung und Chat
-const postRoutes = require('./routes/post');
-const authRoutes = require('./routes/auth');
-const chatRoutes = require('./routes/chat');
+const postRoutes = require("./routes/post");
+const authRoutes = require("./routes/auth");
+// const chatRoutes = require('./routes/chat');
 
-
-app.use('/api/posts', postRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/chat', chatRoutes);
-
+app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/auth", authRoutes);
+// app.use('/api/chat', chatRoutes);
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => {console.log(`Server läuft auf Port ${port}`);});
+app.listen(port, () => {
+  console.log(`Server läuft auf Port ${port}`);
+});
