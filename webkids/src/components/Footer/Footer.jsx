@@ -23,6 +23,9 @@ const Footer = () => {
           <li>
             <Link to="/datenschutzerklaerung">Datenschutzerklärung</Link>
           </li>
+          <li>
+            <Link to="/AboutUs">Über Uns</Link>
+          </li>
         </ul>
       </div>
       <div>Webkids © 2024</div>

@@ -21,6 +21,7 @@ import Freunde from "./components/ProfilePages/freunde/freunde";
 import Fotos from "./components/ProfilePages/fotos/fotos";
 import Videos from "./components/ProfilePages/videosPage/Videos";
 import Besuche from "./components/ProfilePages/besuche/besuche";
+import AboutUs from "./components/AboutUs/AboutUs";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/help" element={<Help />} />
             <Route path="/datenschutzerklaerung" element={<PrivacyPolicy />} />
+            <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/konto" element={<Konto />} />
             <Route path="/newsletter" element={<Newsletter />} />
             <Route path="/beiträge" element={<Beiträge />} />
