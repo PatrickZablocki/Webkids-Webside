@@ -225,7 +225,7 @@ const Navbar = () => {
   const routesWithoutNavbar =
     ['/login', '/register', '/konto', '/info',
       '/freunde', '/fotos', '/videos', '/besuche', '/help', '/datenschutzerklaerung',
-      '/cookies', '/cookie-settings', '/impressum', '/beiträge',
+      '/cookies', '/cookie-settings', '/impressum', '/beiträge', '/AboutUs',
     ];
   const isRouteWithoutNavbar = routesWithoutNavbar.includes(location.pathname);
 

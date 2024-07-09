@@ -1,5 +1,4 @@
 /*  Hier muss das Styling für den Body , Weiß soll es nicht bleiben */
-
 /* Einstellung zum Logo*/
 .logo {
     width: 150px;
@@ -8,6 +7,12 @@
     position: absolute;
     top: 20px;
     left: 20px;
+    margin-top: 70px;
+}
+.Team_container{
+    background: linear-gradient(90deg, rgba(0,235,220,1) 0%, rgba(29,131,253,1) 50%, rgba(16,5,50,1) 100%);;
+    border-radius: 30px;
+    box-shadow: 5px 5px 5px #222;
 }
 .headline{
     color: #fff;
@@ -19,7 +24,7 @@
 }
 .Content_container{
     display: flex;
-    justify-content: space-evenly;    
+    justify-content: space-evenly;   
 }
 .Content_container h2{
     color: #fff;
