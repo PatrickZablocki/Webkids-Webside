@@ -1,0 +1,6 @@
+.chatBody {
+  flex: 1;
+  overflow-y: auto;
+  height: 40vh;
+  border-radius: 1px solid black;
+}

@@ -21,7 +21,8 @@ import Freunde from "./components/ProfilePages/freunde/freunde";
 import Fotos from "./components/ProfilePages/fotos/fotos";
 import Videos from "./components/ProfilePages/videosPage/Videos";
 import Besuche from "./components/ProfilePages/besuche/besuche";
-import Chatpage from "./components/Chat/Pages/Chatpage";
+import Main from "./components/Chat/Main";
+// import Chatpage from "./components/Chat/Pages/Chatpage";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/messages" element={<Chatpage />} />
+            <Route path="/messages" element={<Main />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/cookie-settings" element={<CookieSettings />} />
             <Route path="/impressum" element={<Impressum />} />
