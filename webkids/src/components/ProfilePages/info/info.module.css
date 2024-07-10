@@ -80,3 +80,10 @@
     color: #777;
     margin: 0;
 }
+
+.profile_picture {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}

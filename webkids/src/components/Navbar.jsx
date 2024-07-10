@@ -56,15 +56,30 @@ const Navbar = () => {
     }
   };
 
-  
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        fetchUserInfo();
+      } else {
+        setUser(null);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  // Hier stelle ich ein das die Navbar in den folgenden Components nicht angezeigt wird
   const routesWithoutNavbar =
-  ['/login','/register','/konto','/info',
-  '/freunde','/fotos','/videos','/besuche','/help','/datenschutzerklaerung',
-  '/cookies','/cookie-settings','/impressum','/beiträge',
-  ];
+    ['/login', '/register', '/konto', '/info',
+      '/freunde', '/fotos', '/videos', '/besuche', '/help', '/datenschutzerklaerung',
+      '/cookies', '/cookie-settings', '/impressum', '/beiträge', '/AboutUs',
+    ];
   const isRouteWithoutNavbar = routesWithoutNavbar.includes(location.pathname);
 
-  
   if (isRouteWithoutNavbar) {
     return null;
   }

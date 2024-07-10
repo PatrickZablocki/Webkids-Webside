@@ -45,7 +45,7 @@ export const Newsletter = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email }), // Hier wird die E-Mail-Adresse des Benutzers übergeben
+                body: JSON.stringify({ email: '' }), // Leere E-Mail-Adresse oder gar keine E-Mail-Adresse übergeben
             });
 
             if (!response.ok) {
@@ -53,6 +53,7 @@ export const Newsletter = () => {
             }
 
             setShow(false);
+            localStorage.setItem('newsletterDismissed', 'true'); // Speichern Sie den Status im lokalen Speicher
         } catch (error) {
             console.error('Fehler:', error);
             setError('Es gab ein Problem beim Ablehnen. Bitte versuche es später erneut.');
@@ -66,7 +67,7 @@ export const Newsletter = () => {
     };
 
     const handleClose = async () => {
-        await declineNewsletter();
+        await declineNewsletter(); // Übergabe der leeren E-Mail-Adresse
     };
 
     if (!show) {
@@ -100,3 +101,4 @@ export const Newsletter = () => {
         </div>
     );
 };
+
