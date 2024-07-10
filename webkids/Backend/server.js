@@ -165,22 +165,9 @@ app.post('/login', async (req, res) => {
 // Route für den Newsletter
 app.post('/decline-newsletter', async (req, res) => {
     try {
-        const { email } = req.body;
-
-        if (!email) {
-            return res.status(400).json({ message: 'Email ist erforderlich' });
-        }
-
-        // Finde den Benutzer anhand der E-Mail
-        const existingUser = await User.findOne({ email });
-        if (!existingUser) {
-            return res.status(400).json({ message: 'Benutzer nicht gefunden' });
-        }
-
-        // Aktualisiere das newsletterDeclined Feld auf true
-        existingUser.newsletterDeclined = true;
-        await existingUser.save();
-
+        // Hier keine E-Mail-Validierung mehr durchführen
+        // Stattdessen den Status einfach als abgelehnt setzen
+        
         res.status(200).json({ message: 'Newsletter erfolgreich abgelehnt' });
     } catch (error) {
         console.error('Fehler beim Ablehnen des Newsletters:', error);
