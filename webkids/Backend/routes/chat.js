@@ -1,32 +1,26 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require("express");
 const router = express.Router();
+const Message = require("../models/message");
 
-const MessageSchema = new mongoose.Schema({
-    username: String,
-    message: String,
-    timestamp: { type: Date, default: Date.now }
+router.get("/", async (req, res) => {
+  try {
+    const messages = await Message.find().sort({ timestamp: 1 });
+    res.json(messages);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-const Message = mongoose.model('Message', MessageSchema);
+router.post("/", async (req, res) => {
+  const { user, message } = req.body;
+  const newMessage = new Message({ user, message });
 
-router.get('/messages', async (req, res) => {
-    try {
-        const messages = await Message.find().sort({ timestamp: -1 });
-        res.json(messages);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-router.post('/messages', async (req, res) => {
-    try {
-        const newMessage = new Message(req.body);
-        await newMessage.save();
-        res.json(newMessage);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+  try {
+    const savedMessage = await newMessage.save();
+    res.status(201).json(savedMessage);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;

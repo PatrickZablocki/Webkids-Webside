@@ -12,7 +12,7 @@ import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import CookieConsent from "./components/CookieConsent/CookieConsent";
 import styles from "./App.module.css";
 import Homepage from "./components/Homepage/Homepage";
-import Chat from "./components/Chat/Chat";
+import Main from "./components/Chat/Main";
 import { Newsletter } from "./components/Newsletter/Newsletter";
 import Konto from "./components/Konto/Konto";
 import Beiträge from "./components/ProfilePages/Beiträge/Beiträge";
@@ -21,7 +21,7 @@ import Freunde from "./components/ProfilePages/freunde/freunde";
 import Fotos from "./components/ProfilePages/fotos/fotos";
 import Videos from "./components/ProfilePages/videosPage/Videos";
 import Besuche from "./components/ProfilePages/besuche/besuche";
-import AboutUs from "./components/AboutUs/AboutUs";
+import Aboutus from "./components/AboutUs/AboutUs";
 
 function App() {
   return (
@@ -30,17 +30,17 @@ function App() {
         <Navbar />
         <div className={styles.content}>
           <Routes>
-          <Route path="/navbar" element={<Navbar />} />
+            <Route path="/navbar" element={<Navbar />} />
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/messages" element={<Chat />} />
+            <Route path="/messages" element={<Main />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/cookie-settings" element={<CookieSettings />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/help" element={<Help />} />
             <Route path="/datenschutzerklaerung" element={<PrivacyPolicy />} />
-            <Route path="/AboutUs" element={<AboutUs />} />
+            <Route path="/AboutUs" element={<Aboutus />} />
             <Route path="/konto" element={<Konto />} />
             <Route path="/newsletter" element={<Newsletter />} />
             <Route path="/beiträge" element={<Beiträge />} />

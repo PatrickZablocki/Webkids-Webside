@@ -1,0 +1,13 @@
+.app {
+  margin-top: 150px;
+  display: flex;
+  flex-direction: row;
+}
+
+.contact {
+  width: 30%;
+}
+
+.chat {
+  width: 60%;
+}
